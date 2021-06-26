@@ -62,7 +62,7 @@ const mixesDbTitles = (data: any) => (
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
-  ) {
+) {
   const searchString = req.body.searchString;
 
   const keys: Keys = {

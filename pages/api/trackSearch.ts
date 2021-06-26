@@ -64,23 +64,19 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const searchString = req.body.searchString;
-
   const keys: Keys = {
     'keyDiscogs': process.env.keydiscogs as string,
     'keyGoogleYoutube': process.env.keygyoutube as string,
     'keyGoogleMixesDb': process.env.keygmixesdb as string,
   };
-
   const discogsResults = await fetch(urlDiscogs(searchString, keys.keyDiscogs))
     .then(data => data.json())
     .then(jsonData => jsonData.results[0])
     .catch(error => error);
-  
   const youtubeResult = await fetch(urlYoutube(searchString, keys.keyGoogleYoutube))
     .then((data) => data.json())
     .then(jsonData => jsonData.items[0].id.videoId)
     .catch(error => error);
-  
   const mixesDbResults = await fetch(urlMixesDB(searchString, keys.keyGoogleMixesDb))
     .then((data) => data.json())
     .then(jsonData => mixesDbTitles(jsonData.items))

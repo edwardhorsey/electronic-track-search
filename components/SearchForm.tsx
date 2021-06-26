@@ -10,7 +10,6 @@ const SearchForm = () => {
     artist: '',
     track: '',
   });
-  console.log(searchQuery);
 
   return (
     <form className="form my-6 text-left text-lg">
@@ -51,6 +50,26 @@ const SearchForm = () => {
           className="bg-blue-300 text-xl font-bold pt-2 pb-2 pl-4 pr-4
           rounded-lg"
           type="submit"
+          onClick={async (e) => {
+            e.preventDefault();
+
+            const body = JSON.stringify({
+              searchString: searchQuery.artist + ' ' + searchQuery.track
+            });
+
+            const results = await fetch('/api/trackSearch', {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body,
+            })
+              .then(res => res.json())
+              .catch(err => err);
+
+            console.log(results);
+            return results;
+          }}
         >
           Search
         </button>

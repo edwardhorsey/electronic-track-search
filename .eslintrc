@@ -18,6 +18,16 @@
       }
     ],
     "max-len": ["error", { "code": 120 }, 4],
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   }
 }

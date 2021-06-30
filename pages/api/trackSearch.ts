@@ -1,10 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface Keys {
   keyDiscogs: string;
   keyGoogleYoutube: string;
   keyGoogleMixesDb: string;
-};
+}
 
 interface DiscogsResults {
   'country'?: string;
@@ -32,14 +32,14 @@ interface DiscogsResults {
     'want'?: number;
     'have'?: number;
   },
-};
+}
 
 interface Data {
   name: string;
   discogsResults: DiscogsResults;
   youtubeResult: string;
   mixesDbResults: string[];
-};
+}
 
 const urlDiscogs = (search: string, key: string) => (
   'https://api.discogs.com/database/search?q='
@@ -54,38 +54,41 @@ const urlMixesDB = (search: string, key: string) => (
   + `?&key=${key}&cx=011544546440637270403%3Argrlx5occ_0&q=${search}`
 );
 const mixesDbTitles = (data: any) => (
-  data.map((el: any) => (
-    el.link.slice(el.link.indexOf('/w/')+16).replace(/_/g, ' '))
-  )
+  data.map((el: any) => el.link
+    .slice(el.link.indexOf('/w/') + 16).replace(/_/g, ' '))
 );
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
-  const searchString = req.body.searchString;
+  const { searchString } = req.body.searchString;
   const keys: Keys = {
-    'keyDiscogs': process.env.keydiscogs as string,
-    'keyGoogleYoutube': process.env.keygyoutube as string,
-    'keyGoogleMixesDb': process.env.keygmixesdb as string,
+    keyDiscogs: process.env.keydiscogs as string,
+    keyGoogleYoutube: process.env.keygyoutube as string,
+    keyGoogleMixesDb: process.env.keygmixesdb as string,
   };
   const discogsResults = await fetch(urlDiscogs(searchString, keys.keyDiscogs))
-    .then(data => data.json())
-    .then(jsonData => jsonData.results[0])
-    .catch(error => error);
-  const youtubeResult = await fetch(urlYoutube(searchString, keys.keyGoogleYoutube))
     .then((data) => data.json())
-    .then(jsonData => jsonData.items[0].id.videoId)
-    .catch(error => error);
-  const mixesDbResults = await fetch(urlMixesDB(searchString, keys.keyGoogleMixesDb))
+    .then((jsonData) => jsonData.results[0])
+    .catch((error) => error);
+  const youtubeResult = await fetch(
+    urlYoutube(searchString, keys.keyGoogleYoutube),
+  )
     .then((data) => data.json())
-    .then(jsonData => mixesDbTitles(jsonData.items))
-    .catch(error => error);
+    .then((jsonData) => jsonData.items[0].id.videoId)
+    .catch((error) => error);
+  const mixesDbResults = await fetch(
+    urlMixesDB(searchString, keys.keyGoogleMixesDb),
+  )
+    .then((data) => data.json())
+    .then((jsonData) => mixesDbTitles(jsonData.items))
+    .catch((error) => error);
 
   res.status(200).json({
     name: 'Track search',
     discogsResults,
     youtubeResult,
     mixesDbResults,
-  })
+  });
 }

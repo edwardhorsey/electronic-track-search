@@ -6,6 +6,11 @@ interface FormItems {
   track: string;
 }
 
+const formIds = {
+  artist: uniqueId('artist'),
+  track: uniqueId('track'),
+};
+
 const getTrackResults = async (artist: string, track: string) => {
   const body = JSON.stringify({
     searchString: `${artist} ${track}`,
@@ -29,14 +34,6 @@ const SearchForm = (): JSX.Element => {
     artist: '',
     track: '',
   });
-
-  const [formIds] = useState<FormItems>({
-    artist: uniqueId('artist'),
-    track: uniqueId('track'),
-  });
-
-  const bit = uniqueId('testing this');
-  console.log(bit);
 
   return (
     <form className="form my-6 text-left text-lg">

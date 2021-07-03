@@ -1,19 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Title from '../components/Title'
-import SearchForm from '../components/SearchForm'
+import Head from 'next/head';
+import Image from 'next/image';
+import Title from '../components/Title';
+import SearchForm from '../components/SearchForm';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div className="flex flex-col items-center justify-center
-    min-h-screen py-2">
+    min-h-screen py-2"
+    >
       <Head>
         <title>Electronic Track Search</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex flex-col items-center justify-center
-      w-full flex-1 px-20 text-center">
+      w-full flex-1 px-20 text-center"
+      >
         <Title />
         <SearchForm />
       </main>
@@ -32,5 +34,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  )
+  );
 }

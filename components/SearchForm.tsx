@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import uniqueId from '../utils/uniqueId';
 
 interface FormItems {
@@ -11,17 +12,15 @@ const formIds = {
   track: uniqueId('track'),
 };
 
-const getTrackResults = async (artist: string, track: string) => {
-  const body = JSON.stringify({
-    searchString: `${artist} ${track}`,
-  });
-
+const getTrackResults = async ({ artist, track }: FormItems) => {
   const results = await fetch('/api/trackSearch', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body,
+    body: JSON.stringify({
+      searchString: `${artist} ${track}`,
+    }),
   })
     .then((res) => res.json())
     .catch((err) => err);
@@ -30,13 +29,12 @@ const getTrackResults = async (artist: string, track: string) => {
 };
 
 const SearchForm = (): JSX.Element => {
-  const [searchQuery, setSearchQuery] = useState<FormItems>({
-    artist: '',
-    track: '',
-  });
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   return (
-    <form className="form my-6 text-left text-lg">
+    <form
+      onSubmit={handleSubmit(getTrackResults)}
+      className="form my-6 text-left text-lg"
+    >
       <div className="flex justify-center mt-6">
         <div className="flex flex-col mb-2">
           <label htmlFor={formIds.artist} className="ml-3">
@@ -46,15 +44,15 @@ const SearchForm = (): JSX.Element => {
               className="border border-gray-200 p-2 mt-1 mb-1 ml-2 mr-2
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
-              name="artist"
               id={formIds.artist}
-              value={searchQuery.artist}
-              onChange={(e) => setSearchQuery({
-                ...searchQuery,
-                artist: e.target.value,
-              })}
+              {...register('artist', { required: true })}
               placeholder="Seleccion Natural"
             />
+            {errors.artist?.type === 'required' && (
+              <p className="mb-3 text-normal text-red-500">
+                Artist is required
+              </p>
+            )}
           </label>
         </div>
         <div className="flex flex-col mb-2">
@@ -65,15 +63,15 @@ const SearchForm = (): JSX.Element => {
               className="border border-gray-200 p-2 mt-1 mb-1 ml-2 mr-2
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
-              name="track"
               id={formIds.track}
-              value={searchQuery.track}
-              onChange={(e) => setSearchQuery({
-                ...searchQuery,
-                track: e.target.value,
-              })}
+              {...register('track', { required: true })}
               placeholder="Left Behind"
             />
+            {errors.track?.type === 'required' && (
+              <p className="mb-3 text-normal text-red-500">
+                Track is required
+              </p>
+            )}
           </label>
         </div>
       </div>
@@ -82,10 +80,6 @@ const SearchForm = (): JSX.Element => {
           className="bg-blue-300 text-xl font-bold pt-2 pb-2 pl-4 pr-4
           rounded-lg"
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            getTrackResults(searchQuery.artist, searchQuery.track);
-          }}
         >
           Search
         </button>

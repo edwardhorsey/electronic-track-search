@@ -41,7 +41,7 @@ const SearchForm = (): JSX.Element => {
             Artist
             <input
               type="text"
-              className="border border-gray-200 p-2 mt-1 mb-1 ml-2 mr-2
+              className="border border-gray-200 p-2 mt-1 mb-1
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
               id={formIds.artist}
@@ -60,7 +60,7 @@ const SearchForm = (): JSX.Element => {
             Track
             <input
               type="text"
-              className="border border-gray-200 p-2 mt-1 mb-1 ml-2 mr-2
+              className="border border-gray-200 p-2 mt-1 mb-1
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
               id={formIds.track}

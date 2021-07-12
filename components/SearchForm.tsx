@@ -1,5 +1,5 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import uniqueId from '../utils/uniqueId';
 
 interface FormItems {
@@ -12,32 +12,23 @@ const formIds = {
   track: uniqueId('track'),
 };
 
-const getTrackResults = async ({ artist, track }: FormItems) => {
-  const results = await fetch('/api/trackSearch', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      searchString: `${artist} ${track}`,
-    }),
-  })
-    .then((res) => res.json())
-    .catch((err) => err);
-
-  return results;
-};
-
 const SearchForm = (): JSX.Element => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const router = useRouter();
+  const onSubmit = (values: FormItems) => {
+    router.push({
+      pathname: '/track',
+      query: { ...values },
+    });
+  };
   return (
     <form
-      onSubmit={handleSubmit(getTrackResults)}
+      onSubmit={handleSubmit(onSubmit)}
       className="form my-6 text-left text-lg"
     >
       <div className="flex justify-center mt-6">
         <div className="flex flex-col mb-2">
-          <label htmlFor={formIds.artist} className="ml-3">
+          <label htmlFor={formIds.artist} className="flex flex-col ml-3">
             Artist
             <input
               type="text"
@@ -56,7 +47,7 @@ const SearchForm = (): JSX.Element => {
           </label>
         </div>
         <div className="flex flex-col mb-2">
-          <label htmlFor={formIds.track} className="ml-3">
+          <label htmlFor={formIds.track} className="flex flex-col ml-3">
             Track
             <input
               type="text"

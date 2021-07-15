@@ -62,7 +62,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const { searchString } = req.body.searchString;
+  const { searchString } = req.body;
   const keys: Keys = {
     keyDiscogs: process.env.keydiscogs as string,
     keyGoogleYoutube: process.env.keygyoutube as string,

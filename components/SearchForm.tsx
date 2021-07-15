@@ -1,11 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { SearchQuery } from '../types/types';
 import uniqueId from '../utils/uniqueId';
-
-interface FormItems {
-  artist: string;
-  track: string;
-}
 
 const formIds = {
   artist: uniqueId('artist'),
@@ -15,12 +11,13 @@ const formIds = {
 const SearchForm = (): JSX.Element => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const router = useRouter();
-  const onSubmit = (values: FormItems) => {
+  const onSubmit = (values: SearchQuery) => (
     router.push({
       pathname: '/track',
       query: { ...values },
-    });
-  };
+    })
+  );
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

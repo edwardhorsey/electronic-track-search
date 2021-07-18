@@ -11,8 +11,9 @@ const Track = (): JSX.Element => {
     && typeof track === 'string'
   ) {
     return (
-      <main className="flex flex-col items-center justify-center
-      w-full flex-1 px-20 text-center"
+      <main
+        className="flex flex-col items-center justify-center
+        w-full flex-1 px-20 text-center"
       >
         <h1 className="text-5xl font-bold">Track page</h1>
         <div className="flex flex-col items-center">
@@ -25,8 +26,9 @@ const Track = (): JSX.Element => {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center
-    w-full flex-1 px-20 text-center"
+    <main
+      className="flex flex-col items-center justify-center
+      w-full flex-1 px-20 text-center"
     >
       <h1 className="text-5xl font-bold">Track page</h1>
       <h2 className="text-2xl">Invalid query</h2>

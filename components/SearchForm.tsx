@@ -33,6 +33,7 @@ const SearchForm = (): JSX.Element => {
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
               id={formIds.artist}
+              /* eslint-disable react/jsx-props-no-spreading */
               {...register('artist', { required: true })}
               placeholder="Seleccion Natural"
             />
@@ -52,6 +53,7 @@ const SearchForm = (): JSX.Element => {
               rounded-lg appearance-none focus:outline-none
               focus:border-gray-500"
               id={formIds.track}
+              /* eslint-disable react/jsx-props-no-spreading */
               {...register('track', { required: true })}
               placeholder="Left Behind"
             />

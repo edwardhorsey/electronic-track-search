@@ -1,44 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { GetTrackResultsData } from '../../types/types';
 
 interface Keys {
   keyDiscogs: string;
   keyGoogleYoutube: string;
   keyGoogleMixesDb: string;
-}
-
-interface DiscogsResults {
-  'country'?: string;
-  'year'?: string;
-  'format'?: string[];
-  'label'?: string[];
-  'type'?: string;
-  'genre'?: string[];
-  'style'?: string[];
-  'id'?: number;
-  'barcode'?: [],
-  'user_data'?: {
-    'in_wantlist'?: boolean;
-    'in_collection'?: boolean;
-  },
-  'master_id'?: number;
-  'master_url'?: string;
-  'uri'?: string;
-  'catno'?: string;
-  'title'?: string;
-  'thumb'?: string;
-  'cover_image'?: string;
-  'resource_url'?: string;
-  'community'?: {
-    'want'?: number;
-    'have'?: number;
-  },
-}
-
-interface Data {
-  name: string;
-  discogsResults: DiscogsResults;
-  youtubeResult: string;
-  mixesDbResults: string[];
 }
 
 const urlDiscogs = (search: string, key: string) => (
@@ -60,7 +26,7 @@ const mixesDbTitles = (data: any) => (
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
+  res: NextApiResponse<GetTrackResultsData>,
 ) {
   const { searchString } = req.body;
   const keys: Keys = {

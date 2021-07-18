@@ -28,7 +28,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GetTrackResultsData>,
 ) {
-  const { searchString } = req.body;
+  const { artist, track } = req.query;
+  const searchString = `${artist} ${track}`;
   const keys: Keys = {
     keyDiscogs: process.env.keydiscogs as string,
     keyGoogleYoutube: process.env.keygyoutube as string,

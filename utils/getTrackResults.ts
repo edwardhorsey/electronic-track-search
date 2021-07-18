@@ -1,17 +1,12 @@
-import { GetTrackResultsData, SearchQuery } from '../types/types';
+import { GetTrackResultsData } from '../types/types';
 
-const getTrackResults = async (
-  searchQuery: SearchQuery,
-): Promise<GetTrackResultsData> => (
-  fetch('/api/trackSearch', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ searchQuery }),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error(err))
-);
+const getTrackResults = async (url: string): Promise<GetTrackResultsData> => {
+  const res = await fetch(url);
+  if (!res.ok) {
+    const error = new Error('An error occurred while fetching the data.');
+    throw error;
+  }
+  return res.json();
+};
 
 export default getTrackResults;

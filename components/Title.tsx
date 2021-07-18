@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Title = (): JSX.Element => (
   <>
     <h1 className="text-6xl font-bold">Electronic Track Search</h1>

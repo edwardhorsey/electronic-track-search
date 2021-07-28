@@ -1,37 +1,16 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 
-import { Button } from './Button';
+import { Button, ButtonProps } from './Button';
 
 export default {
-  title: 'Example/Button',
+  title: 'Components/Input',
   component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof Button>;
+} as Meta;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: Story<ButtonProps> = (
+  args: ButtonProps,
+) => <Button {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: 'Button',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
-};
+Primary.args = { text: 'let\'s go!', submit: true };

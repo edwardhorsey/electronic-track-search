@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { SearchQuery } from '../types/types';
 import { InputText } from '../stories/InputText';
+import { Button } from '../stories/Button';
 import uniqueId from '../utils/uniqueId';
 
 const formIds = {
@@ -57,13 +58,10 @@ const SearchForm = (): JSX.Element => {
         </div>
       </div>
       <div className="flex justify-center">
-        <button
-          className="bg-blue-300 text-xl font-bold pt-2 pb-2 pl-4 pr-4
-          rounded-lg"
-          type="submit"
-        >
-          Search
-        </button>
+        <Button
+          text="Search"
+          submit
+        />
       </div>
     </form>
   );

@@ -1,15 +1,12 @@
 import React from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
 
 export interface InputTextProps {
   id: string;
   placeholder: string;
-  useFormRegister?: UseFormRegisterReturn,
 }
 
 export const InputText = ({
   id,
-  useFormRegister,
   placeholder,
 }: InputTextProps): JSX.Element => (
   <input
@@ -19,6 +16,5 @@ export const InputText = ({
     focus:border-gray-500"
     id={id}
     placeholder={placeholder}
-    {...useFormRegister}
   />
 );

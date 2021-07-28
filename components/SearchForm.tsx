@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { SearchQuery } from '../types/types';
+import { InputText } from '../stories/InputText';
 import uniqueId from '../utils/uniqueId';
 
 const formIds = {
@@ -27,14 +28,10 @@ const SearchForm = (): JSX.Element => {
         <div className="flex flex-col mb-2">
           <label htmlFor={formIds.artist} className="flex flex-col ml-3">
             Artist
-            <input
-              type="text"
-              className="border border-gray-200 p-2 mt-1 mb-1
-              rounded-lg appearance-none focus:outline-none
-              focus:border-gray-500"
+            <InputText
               id={formIds.artist}
-              {...register('artist', { required: true })}
               placeholder="Seleccion Natural"
+              {...register('artist', { required: true })}
             />
             {errors.artist?.type === 'required' && (
               <p className="mb-3 text-normal text-red-500">
@@ -46,14 +43,10 @@ const SearchForm = (): JSX.Element => {
         <div className="flex flex-col mb-2">
           <label htmlFor={formIds.track} className="flex flex-col ml-3">
             Track
-            <input
-              type="text"
-              className="border border-gray-200 p-2 mt-1 mb-1
-              rounded-lg appearance-none focus:outline-none
-              focus:border-gray-500"
+            <InputText
               id={formIds.track}
-              {...register('track', { required: true })}
               placeholder="Left Behind"
+              {...register('track', { required: true })}
             />
             {errors.track?.type === 'required' && (
               <p className="mb-3 text-normal text-red-500">

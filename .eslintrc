@@ -10,10 +10,10 @@
       2,
       {
         "extensions": [
-            ".js",
-            ".jsx",
-            ".ts",
-            ".tsx"
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       }
     ],
@@ -29,6 +29,16 @@
         "tsx": "never"
       }
     ],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          ".storybook/**",
+          "stories/**" 
+        ]
+      }
+    ]
   }
 }

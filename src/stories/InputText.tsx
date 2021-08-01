@@ -28,8 +28,8 @@ export const InputText = ({
   required = false,
 }: InputTextProps): JSX.Element => (
   <div className="flex flex-col mb-2">
-    <label htmlFor={id} className="flex flex-col ml-3 pl-1">
-      {label}
+    <label htmlFor={id} className="flex flex-col ml-3">
+      <span className="pl-1">{label}</span>
       <input
         type="text"
         className="border border-gray-200 p-2 mt-1 mb-1
@@ -41,9 +41,9 @@ export const InputText = ({
       />
     </label>
     {errors[name]?.type === 'required' && (
-      <p className="mb-3 ml-3 pl-1 text-normal text-red-500">
+      <span className="mb-3 ml-3 pl-1 text-normal text-red-500">
         {errorMessage || `${label} is required`}
-      </p>
+      </span>
     )}
   </div>
 );

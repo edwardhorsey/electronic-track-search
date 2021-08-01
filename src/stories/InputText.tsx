@@ -27,7 +27,7 @@ export const InputText = ({
   register,
   required = false,
 }: InputTextProps): JSX.Element => (
-  <>
+  <div className="flex flex-col mb-2">
     <label htmlFor={id} className="flex flex-col ml-3 pl-1">
       {label}
       <input
@@ -45,5 +45,5 @@ export const InputText = ({
         {errorMessage || `${label} is required`}
       </p>
     )}
-  </>
+  </div>
 );

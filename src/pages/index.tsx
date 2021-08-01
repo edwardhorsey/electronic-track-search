@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import Title from '../components/Title';
-import SearchForm from '../components/SearchForm';
+import Title from '../stories/Title';
+import SearchForm from '../stories/SearchForm';
 
 export default function Home(): JSX.Element {
   return (

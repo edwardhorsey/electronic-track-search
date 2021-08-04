@@ -19,11 +19,11 @@ export const DiscogsResults = ({
 
   return (
     <div>
-      <h3>{title}</h3>
+      <h3 className="text-2xl text-center m-1">{title}</h3>
       <div className="flex">
         {coverImage && (
           /* eslint-disable @next/next/no-img-element */
-          <div className="max-w-sm">
+          <div className="w-2/4 h-auto">
             <img
               src={coverImage}
               alt={`${title} cover`}
@@ -31,12 +31,12 @@ export const DiscogsResults = ({
             />
           </div>
         )}
-        <div>
-          <p>{`Label: ${label}`}</p>
-          <p>{`Country: ${country}`}</p>
-          <p>{`Year: ${year}`}</p>
-          {style && <p>{`Style: ${style.join(' ')}`}</p>}
-          {format && <p>{`Format: ${format.join(' ')}`}</p>}
+        <div className="flex flex-col pl-5 pt-3">
+          <p className="m-1">{`Label: ${label}`}</p>
+          <p className="m-1">{`Country: ${country}`}</p>
+          <p className="m-1">{`Year: ${year}`}</p>
+          {style && <p className="m-1">{`Style: ${style.join(' ')}`}</p>}
+          {format && <p className="m-1">{`Format: ${format.join(' ')}`}</p>}
         </div>
       </div>
     </div>

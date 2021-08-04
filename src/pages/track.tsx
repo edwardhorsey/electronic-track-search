@@ -15,11 +15,7 @@ const Track = (): JSX.Element => {
         className="flex flex-col items-center justify-center
         w-full flex-1 px-20 text-center"
       >
-        <h1 className="text-5xl font-bold">Track page</h1>
-        <div className="flex flex-col items-center">
-          <p className="text-2xl">{`Artist: ${artist}`}</p>
-          <p className="text-2xl">{`Track: ${track}`}</p>
-        </div>
+        <h1 className="text-4xl font-bold">Track results</h1>
         <ShowResults artist={artist} track={track} />
       </main>
     );
@@ -30,7 +26,7 @@ const Track = (): JSX.Element => {
       className="flex flex-col items-center justify-center
       w-full flex-1 px-20 text-center"
     >
-      <h1 className="text-5xl font-bold">Track page</h1>
+      <h1 className="text-4xl font-bold">Track results</h1>
       <h2 className="text-2xl">Invalid query</h2>
     </main>
   );

@@ -14,6 +14,7 @@ const ShowResults = ({ artist, track }: ShowResultsProps): JSX.Element => {
   const { data, error } = useSWR(url, getTrackResults);
 
   if (error) return <ErrorMessage message={error.message} />;
+
   if (!data) return <SkeletonLoader />;
 
   const discogsResults = filterDiscogsResults(data.discogsResults);

@@ -10,7 +10,10 @@ import { YoutubeResult } from './YoutubeResult';
 /* eslint-disable @typescript-eslint/no-empty-interface */
 export interface ShowResultsProps extends SearchQuery {}
 
-const ShowResults = ({ artist, track }: ShowResultsProps): JSX.Element => {
+export const ShowResults = ({
+  artist,
+  track,
+}: ShowResultsProps): JSX.Element => {
   const url = `/api/trackSearch/?artist=${artist}&track=${track}`;
   const { data, error } = useSWR(url, getTrackResults);
 
@@ -42,5 +45,3 @@ const ShowResults = ({ artist, track }: ShowResultsProps): JSX.Element => {
     </div>
   );
 };
-
-export default ShowResults;

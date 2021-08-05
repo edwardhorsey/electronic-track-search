@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import ShowResults from '../stories/ShowResults';
+import { ShowResults } from '../stories/ShowResults';
 
 const Track = (): JSX.Element => {
   const router = useRouter();

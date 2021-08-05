@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { SearchQuery } from '../types/types';
 import getTrackResults from '../utils/getTrackResults';
 import filterDiscogsResults from '../utils/filterDiscogsResults';
-import SkeletonLoader from './SkeletonLoader';
+import { SkeletonLoader } from './SkeletonLoader';
 import { ErrorMessage } from './ErrorMessage';
 import { DiscogsResults } from './DiscogsResults';
 import { YoutubeResult } from './YoutubeResult';
@@ -16,7 +16,14 @@ const ShowResults = ({ artist, track }: ShowResultsProps): JSX.Element => {
 
   if (error) return <ErrorMessage message={error.message} />;
 
-  if (!data) return <SkeletonLoader />;
+  if (!data) {
+    return (
+      <>
+        <SkeletonLoader type="Discogs" />
+        <SkeletonLoader type="Youtube" />
+      </>
+    );
+  }
 
   const discogsResults = filterDiscogsResults(data.discogsResults);
   const { youtubeResult } = data;

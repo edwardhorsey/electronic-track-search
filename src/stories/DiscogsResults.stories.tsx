@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { DiscogsResponse, DiscogsResultsReduced } from '../types/types';
+import { DiscogsResultsReduced } from '../types/types';
 import filterDiscogsResults from '../utils/filterDiscogsResults';
 
 import { DiscogsResults, DiscogsResultsProps } from './DiscogsResults';

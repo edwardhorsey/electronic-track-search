@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { SearchQuery } from '../types/types';
-import { InputText } from '../stories/InputText';
-import { Button } from '../stories/Button';
+import { InputText } from './InputText';
+import { Button } from './Button';
 import uniqueId from '../utils/uniqueId';
 
 const formIds = {
@@ -26,28 +26,24 @@ const SearchForm = (): JSX.Element => {
       className="form my-6 text-left text-lg"
     >
       <div className="flex justify-center mt-6">
-        <div className="flex flex-col mb-2">
-          <InputText
-            id={formIds.artist}
-            label="Artist"
-            name="artist"
-            placeholder="Seleccion Natural"
-            errors={errors}
-            required
-            register={register}
-          />
-        </div>
-        <div className="flex flex-col mb-2">
-          <InputText
-            id={formIds.track}
-            label="Track"
-            name="track"
-            placeholder="Left Behind"
-            errors={errors}
-            required
-            register={register}
-          />
-        </div>
+        <InputText
+          id={formIds.artist}
+          label="Artist"
+          name="artist"
+          placeholder="Seleccion Natural"
+          errors={errors}
+          required
+          register={register}
+        />
+        <InputText
+          id={formIds.track}
+          label="Track"
+          name="track"
+          placeholder="Left Behind"
+          errors={errors}
+          required
+          register={register}
+        />
       </div>
       <div className="flex justify-center">
         <Button

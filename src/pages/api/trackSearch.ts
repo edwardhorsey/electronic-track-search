@@ -7,6 +7,11 @@ interface Keys {
   keyGoogleMixesDb: string;
 }
 
+interface MixesDbTitle {
+  title: string;
+  link: string;
+}
+
 const urlDiscogs = (search: string, key: string) => (
   'https://api.discogs.com/database/search?q='
   + `${search}&token=${key}`
@@ -19,11 +24,12 @@ const urlMixesDB = (search: string, key: string) => (
   'https://www.googleapis.com/customsearch/v1/siterestrict'
   + `?&key=${key}&cx=011544546440637270403%3Argrlx5occ_0&q=${search}`
 );
-const mixesDbTitles = (data: any) => (
-  data.map((el: any) => el.link
-    .slice(el.link.indexOf('/w/') + 16).replace(/_/g, ' '))
+const mixesDbTitles = (data: MixesDbTitle[]) => (
+  data.map((title: MixesDbTitle) => title.link
+    .slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '))
 );
 
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GetTrackResultsData>,
@@ -35,7 +41,9 @@ export default async function handler(
     keyGoogleYoutube: process.env.keygyoutube as string,
     keyGoogleMixesDb: process.env.keygmixesdb as string,
   };
-  const discogsResults = await fetch(urlDiscogs(searchString, keys.keyDiscogs))
+  const discogsResults = await fetch(
+    urlDiscogs(searchString, keys.keyDiscogs),
+  )
     .then((data) => data.json())
     .then((jsonData) => jsonData.results[0])
     .catch((error) => error);

@@ -3,14 +3,14 @@ export interface SearchQuery {
   track: string;
 }
 
-export interface DiscogsResults {
-  'country'?: string;
-  'year'?: string;
-  'format'?: string[];
-  'label'?: string[];
+export interface DiscogsResponse {
+  'country': string;
+  'year': string;
+  'format': string[];
+  'label': string[];
   'type'?: string;
   'genre'?: string[];
-  'style'?: string[];
+  'style': string[];
   'id'?: number;
   'barcode'?: [],
   'user_data'?: {
@@ -21,9 +21,9 @@ export interface DiscogsResults {
   'master_url'?: string;
   'uri'?: string;
   'catno'?: string;
-  'title'?: string;
+  'title': string;
   'thumb'?: string;
-  'cover_image'?: string;
+  'cover_image': string;
   'resource_url'?: string;
   'community'?: {
     'want'?: number;
@@ -31,9 +31,19 @@ export interface DiscogsResults {
   },
 }
 
+export interface DiscogsResultsReduced {
+  title: string;
+  coverImage: string;
+  label: string[];
+  country: string;
+  year: string;
+  style: string[];
+  format: string[];
+}
+
 export interface GetTrackResultsData {
   name: string;
-  discogsResults: DiscogsResults;
+  discogsResults: DiscogsResponse;
   youtubeResult: string;
   mixesDbResults: string[];
 }

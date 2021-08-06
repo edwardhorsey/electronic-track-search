@@ -32,12 +32,12 @@ export const ShowResults = ({
   const { youtubeResult } = data;
 
   return (
-    <div className="flex w-full">
-      <div className="flex flex-col w-2/4 border border-gray-300 p-5">
+    <div className="flex flex-col sm:flex-row w-full">
+      <div className="flex flex-col w-full sm:w-3/5 border border-gray-300 p-5">
         <DiscogsResults results={discogsResults} />
         <YoutubeResult embedId={youtubeResult} />
       </div>
-      <div className="flex justify-center w-2/4 border border-gray-300 p-5">
+      <div className="flex justify-center w-full sm:w-2/5 border border-gray-300 p-5">
         <p className="text-md">
           Soundcloud results
         </p>

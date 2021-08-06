@@ -22,6 +22,19 @@ Success.parameters = {
   ],
 };
 
+export const Loading = Template.bind({});
+Loading.args = { artist: 'Oscar Mulero', track: 'Generator' };
+Loading.parameters = {
+  msw: [
+    rest.get('/api/trackSearch/', (req, res, ctx) => (
+      res(
+        ctx.delay('infinite'),
+        // ctx.json({ message: 'Custom error message here' }),
+      )
+    )),
+  ],
+};
+
 export const Failure = Template.bind({});
 Failure.args = { artist: 'Oscar Mulero', track: 'Generator' };
 Failure.parameters = {

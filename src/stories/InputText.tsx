@@ -28,13 +28,16 @@ export const InputText = ({
   required = false,
 }: InputTextProps): JSX.Element => (
   <div className="flex flex-col mb-2">
-    <label htmlFor={id} className="flex flex-col ml-3">
+    <label
+      htmlFor={id}
+      className="flex flex-col ml-3 text-base sm:text-lg"
+    >
       <span className="pl-1">{label}</span>
       <input
         type="text"
         className="border border-gray-200 p-2 mt-1 mb-1
-        rounded-lg appearance-none focus:outline-none
-        focus:border-gray-500"
+        rounded-lg text-base sm:text-lg appearance-none
+        focus:outline-none focus:border-gray-500"
         id={id}
         placeholder={placeholder}
         {...register(name, { required })}

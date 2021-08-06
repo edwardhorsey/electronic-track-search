@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "npx start-storybook -s public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

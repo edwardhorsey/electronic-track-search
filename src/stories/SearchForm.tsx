@@ -23,9 +23,9 @@ const SearchForm = (): JSX.Element => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="form my-6 text-left text-lg"
+      className="form my-6 text-left"
     >
-      <div className="flex justify-center mt-6">
+      <div className="flex flex-col sm:flex-row justify-center mt-6">
         <InputText
           id={formIds.artist}
           label="Artist"
@@ -45,7 +45,7 @@ const SearchForm = (): JSX.Element => {
           register={register}
         />
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-1">
         <Button
           text="Search"
           submit

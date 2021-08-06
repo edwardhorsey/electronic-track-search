@@ -10,8 +10,8 @@ export const Button = ({
   submit = false,
 }: ButtonProps): JSX.Element => (
   <button
-    className="bg-blue-300 text-xl font-bold pt-2 pb-2 pl-4 pr-4
-    rounded-lg"
+    className="bg-green-300 hover:bg-green-400 text-base sm:text-xl
+    font-bold pt-2 pb-2 pl-4 pr-4 rounded-lg shadow"
     type={submit ? 'submit' : 'button'}
   >
     {text}

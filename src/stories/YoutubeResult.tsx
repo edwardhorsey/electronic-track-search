@@ -3,7 +3,7 @@ export interface YoutubeResultProps {
 }
 
 export const YoutubeResult = ({ embedId }: YoutubeResultProps): JSX.Element => (
-  <div className="w-100% h-64">
+  <div className="w-100% h-64 max-w-2xl">
     <iframe
       width="100%"
       height="100%"

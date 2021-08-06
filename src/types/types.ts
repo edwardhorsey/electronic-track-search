@@ -41,9 +41,17 @@ export interface DiscogsResultsReduced {
   format: string[];
 }
 
-export interface GetTrackResultsData {
+export interface YoutubeResultsData {
+  name: string;
+  youtubeResult: string;
+}
+
+export interface DiscogsResultsData {
   name: string;
   discogsResults: DiscogsResponse;
-  youtubeResult: string;
+}
+
+export interface MixesDbResultsData {
+  name: string;
   mixesDbResults: string[];
 }

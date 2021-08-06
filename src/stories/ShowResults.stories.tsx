@@ -22,15 +22,15 @@ Success.parameters = {
   ],
 };
 
-export const Failure = Template.bind({});
-Failure.args = { artist: 'Oscar Mulero', track: 'Generator' };
-Failure.parameters = {
-  msw: [
-    rest.get('/api/trackSearch/', (req, res, ctx) => (
-      res(
-        ctx.status(500),
-        ctx.json({ message: 'Custom error message here' }),
-      )
-    )),
-  ],
-};
+// export const Failure = Template.bind({});
+// Failure.args = { artist: 'Oscar Mulero', track: 'Generator' };
+// Failure.parameters = {
+//   msw: [
+//     rest.get('/api/trackSearch/', (req, res, ctx) => (
+//       res(
+//         ctx.status(500),
+//         ctx.json({ message: 'Custom error message here' }),
+//       )
+//     )),
+//   ],
+// };

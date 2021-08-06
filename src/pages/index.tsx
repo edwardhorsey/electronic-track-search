@@ -16,7 +16,7 @@ export default function Home(): JSX.Element {
 
       <main
         className="flex flex-col items-center justify-center
-        w-full flex-1 px-20"
+        w-full flex-1 px-5 sm:px-15 md:px-20"
       >
         <Title />
         <SearchForm />

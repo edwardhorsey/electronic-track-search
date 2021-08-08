@@ -1,12 +1,29 @@
-import { DiscogsResultsReduced } from '../types/types';
+import useSWR from 'swr';
+import { SearchQuery, DiscogsResultsData } from '../types/types';
+import filterDiscogsResults from '../utils/filterDiscogsResults';
+import getTrackResults from '../utils/getTrackResults';
+import { ErrorMessage } from './ErrorMessage';
+import { SkeletonLoader } from './SkeletonLoader';
 
-export interface DiscogsResultsProps {
-  results: DiscogsResultsReduced;
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface DiscogsResultsProps extends SearchQuery {}
 
 export const DiscogsResults = ({
-  results,
+  artist,
+  track,
 }: DiscogsResultsProps): JSX.Element => {
+  const url = `/api/discogsSearch/?artist=${artist}&track=${track}`;
+  const { data, error } = useSWR(
+    url,
+    () => getTrackResults<DiscogsResultsData>(url),
+  );
+
+  if (error) return <ErrorMessage message={error.message} />;
+
+  if (!data) return <SkeletonLoader type="Discogs" />;
+
+  const results = filterDiscogsResults(data.discogsResults);
+
   const {
     title,
     coverImage,

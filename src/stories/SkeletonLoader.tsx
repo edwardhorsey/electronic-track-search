@@ -7,7 +7,7 @@ export const SkeletonLoader = ({ type }: SkeletonLoaderProps): JSX.Element => {
     return (
       <div
         className="border border-gray-400 shadow rounded-md p-4
-        max-w-sm w-full"
+        max-w-sm w-full mx-auto mb-4"
       >
         <div
           className="animate-pulse flex flex-col items-center
@@ -32,7 +32,7 @@ export const SkeletonLoader = ({ type }: SkeletonLoaderProps): JSX.Element => {
     return (
       <div
         className="border border-gray-400 shadow rounded-md p-4
-        max-w-sm w-full"
+        max-w-sm w-full mx-auto mb-4"
       >
         <div className="animate-pulse flex space-x-4">
           <div className="flex-1 space-y-4 py-1">
@@ -48,7 +48,7 @@ export const SkeletonLoader = ({ type }: SkeletonLoaderProps): JSX.Element => {
   return (
     <div
       className="border border-gray-400 shadow rounded-md p-4
-      max-w-sm w-full"
+      max-w-sm w-full mx-auto mb-4"
     >
       <div className="animate-pulse flex space-x-4">
         <div className="flex-1 space-y-4 py-1">

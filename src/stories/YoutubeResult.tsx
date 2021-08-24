@@ -24,7 +24,7 @@ export const YoutubeResult = ({
   const { youtubeResult: embedId } = data;
 
   return (
-    <div className="w-100% h-64 max-w-2xl">
+    <div className="w-100% max-w-2xl h-64 md:h-72 lg:h-96">
       <iframe
         width="100%"
         height="100%"

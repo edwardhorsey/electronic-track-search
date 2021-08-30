@@ -44,7 +44,10 @@ export const InputText = ({
       />
     </label>
     {errors[name]?.type === 'required' && (
-      <span className="mb-3 ml-3 pl-1 text-normal text-red-500">
+      <span
+        className="mb-3 ml-3 pl-1 text-normal text-red-500"
+        role="alert"
+      >
         {errorMessage || `${label} is required`}
       </span>
     )}

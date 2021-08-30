@@ -13,7 +13,7 @@ const formIds = {
 const SearchForm = (): JSX.Element => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const router = useRouter();
-  const onSubmit = (values: SearchQuery) => (
+  const onSubmit = (values: SearchQuery): Promise<boolean> => (
     router.push({
       pathname: '/track',
       query: { ...values },
@@ -24,6 +24,7 @@ const SearchForm = (): JSX.Element => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="form my-6 text-left"
+      aria-label="form"
     >
       <div className="flex flex-col sm:flex-row justify-center mt-6">
         <InputText

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { DiscogsResultsData } from '../../types/types';
 
-const urlDiscogs = (search: string, key: string) => (
+const urlDiscogs = (search: string, key: string): string => (
   'https://api.discogs.com/database/search?q='
   + `${search}&token=${key}`
 );

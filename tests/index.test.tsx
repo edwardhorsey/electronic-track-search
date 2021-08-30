@@ -9,7 +9,7 @@ describe('Home', () => {
       screen.getByRole('heading', { name: 'Electronic Track Search' }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { name: 'a track and DJ mix search engine' }),
+      screen.getByRole('heading', { name: 'a track and DJ search engine' }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(/Search for a track/),

@@ -40,4 +40,5 @@ export const mockData = {
     'Regis @ %CE%A013: 2 years of %CF%80, Six D.O.G.S, Athens',
     'Joris Voorn @ Awakenings, Spaarnwoude, Amsterdam',
   ],
+  "test": "doobie-smoking-quote"
 };

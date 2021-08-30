@@ -7,7 +7,7 @@ export default {
   component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (
+const Template: Story<> = (
   args: ButtonProps,
 ) => <Button {...args} />;
 

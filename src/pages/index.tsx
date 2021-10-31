@@ -1,9 +1,19 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Title from '../stories/Title';
+import { SearchQuery } from '../types/types';
 import SearchForm from '../stories/SearchForm';
 
 export default function Home(): JSX.Element {
+  const router = useRouter();
+  const onSubmit = (values: SearchQuery): Promise<boolean> => (
+    router.push({
+      pathname: '/track',
+      query: { ...values },
+    })
+  );
+
   return (
     <div
       className="flex flex-col items-center justify-center
@@ -19,7 +29,7 @@ export default function Home(): JSX.Element {
         w-full flex-1 px-5 sm:px-15 md:px-20"
       >
         <Title />
-        <SearchForm />
+        <SearchForm onSubmit={onSubmit} />
       </main>
 
       <footer className="flex items-center justify-center w-full h-24 border-t">

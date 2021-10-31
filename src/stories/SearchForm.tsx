@@ -1,29 +1,26 @@
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import { SearchQuery } from '../types/types';
 import { InputText } from './InputText';
 import { Button } from './Button';
 import uniqueId from '../utils/uniqueId';
+import { SearchQuery } from '../types/types';
 
 const formIds = {
   artist: uniqueId('artist'),
   track: uniqueId('track'),
 };
 
-const SearchForm = (): JSX.Element => {
+interface SearchFormProps {
+  onSubmit: (values: SearchQuery) => Promise<boolean>;
+}
+
+const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const router = useRouter();
-  const onSubmit = (values: SearchQuery) => (
-    router.push({
-      pathname: '/track',
-      query: { ...values },
-    })
-  );
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="form my-6 text-left"
+      aria-label="form"
     >
       <div className="flex flex-col sm:flex-row justify-center mt-6">
         <InputText

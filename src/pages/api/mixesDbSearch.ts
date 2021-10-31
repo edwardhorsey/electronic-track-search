@@ -31,7 +31,7 @@ export default async function handler(
     .catch((error) => error);
 
   res.status(200).json({
-    name: 'Track search',
+    name: 'MixesDb search',
     mixesDbResults,
   });
 }

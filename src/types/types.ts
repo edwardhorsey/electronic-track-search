@@ -46,12 +46,25 @@ export interface YoutubeResultsData {
   youtubeResult: string;
 }
 
+export type SoundcloudResult = { link: string };
+
+export interface SoundcloudResults {
+  items: SoundcloudResult[];
+}
+
 export interface DiscogsResultsData {
   name: string;
   discogsResults: DiscogsResponse;
 }
 
+export type MixesDbResults = string[];
+
 export interface MixesDbResultsData {
   name: string;
-  mixesDbResults: string[];
+  mixesDbResults: MixesDbResults;
+}
+
+export interface SoundcloudResultsData {
+  name: string;
+  soundcloudResults: SoundcloudResult[];
 }

@@ -64,7 +64,17 @@ export interface MixesDbResultsData {
   mixesDbResults: MixesDbResults;
 }
 
-export interface SoundcloudResultsData {
+export interface MixesDbResultsError {
+  message: string;
+  error: unknown;
+}
+export interface SoundcloudMixResultsData {
   name: string;
   soundcloudResults: SoundcloudResult[];
+}
+
+export type MixesDbLink = string;
+export interface MixesDbTitle {
+  title: string;
+  link: MixesDbLink;
 }

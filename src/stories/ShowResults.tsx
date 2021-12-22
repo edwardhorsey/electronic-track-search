@@ -1,5 +1,6 @@
 import { SearchQuery } from '../types/types';
 import { DiscogsResults } from './DiscogsResults';
+import { SoundcloudResults } from './SoundcloudResults';
 import { YoutubeResult } from './YoutubeResult';
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
@@ -16,7 +17,7 @@ export const ShowResults = ({
     </div>
     <div className="flex justify-center w-full md:w-2/5 border border-gray-300 p-5">
       <p className="text-md">
-        Soundcloud results
+        <SoundcloudResults artist={artist} track={track} />
       </p>
     </div>
   </div>

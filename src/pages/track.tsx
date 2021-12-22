@@ -1,11 +1,14 @@
-import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import { ShowResults } from '../stories/ShowResults';
 
-const Track = (): JSX.Element => {
-  const router = useRouter();
-  const { artist, track } = router.query;
+interface TrackProps {
+  artist: string;
+  track: string;
+}
 
-  if (artist
+const Track = ({ artist, track }: TrackProps): JSX.Element => {
+  if (
+    artist
     && typeof artist === 'string'
     && track
     && typeof track === 'string'
@@ -33,3 +36,12 @@ const Track = (): JSX.Element => {
 };
 
 export default Track;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
+  const { artist, track } = query;
+
+  return {
+    props: { artist, track },
+  };
+};

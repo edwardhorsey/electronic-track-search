@@ -16,9 +16,7 @@ export const ShowResults = ({
       <YoutubeResult artist={artist} track={track} />
     </div>
     <div className="flex justify-center w-full md:w-2/5 border border-gray-300 p-5">
-      <p className="text-md">
-        <SoundcloudResults artist={artist} track={track} />
-      </p>
+      <SoundcloudResults artist={artist} track={track} />
     </div>
   </div>
 );

@@ -4,8 +4,8 @@ import {
   SoundcloudMixResultsData,
   MixesDbResultsError,
   MixesDbResults,
-  SoundcloudResult,
   SoundcloudResults,
+  SoundcloudMixResults,
   MixesDbLink,
   MixesDbTitle,
   GoogleSearchKeys,
@@ -43,7 +43,7 @@ const findLink = (result: SoundcloudResults): string|null => {
 
 const getSoundcloudLinkRequest = async (
   link: GoogleSearchRequest,
-): Promise<SoundcloudResult> => fetch(link.url)
+): Promise<SoundcloudMixResults> => fetch(link.url)
   .then((data) => data.json())
   .then((jsonData) => {
     const output = { title: link.title, url: findLink(jsonData) };
@@ -86,13 +86,13 @@ export default async function handler(
       mixesDbResultsMixTitles,
       soundcloudKeys,
     );
-    const soundcloudMixesLinks = await fetchAllUrls(
+    const soundcloudMixResults = await fetchAllUrls(
       arrayOfSoundcloudGoogleSearchRequests,
     );
 
     res.status(200).json({
       name: 'Soundcloud mixes search',
-      soundcloudResults: soundcloudMixesLinks,
+      soundcloudMixResults,
     });
   } catch (error) {
     // eslint-disable-next-line no-console

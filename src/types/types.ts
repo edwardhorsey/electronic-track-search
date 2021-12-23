@@ -52,6 +52,11 @@ export interface SoundcloudResults {
   items: SoundcloudResult[];
 }
 
+export interface SoundcloudMixResults {
+  title: string;
+  url: string
+}
+
 export interface DiscogsResultsData {
   name: string;
   discogsResults: DiscogsResponse;
@@ -70,7 +75,7 @@ export interface MixesDbResultsError {
 }
 export interface SoundcloudMixResultsData {
   name: string;
-  soundcloudResults: SoundcloudResult[];
+  soundcloudMixResults: SoundcloudMixResults[];
 }
 
 export type MixesDbLink = string;

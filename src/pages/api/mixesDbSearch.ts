@@ -13,11 +13,11 @@ import {
 } from '../../types/types';
 import { soundcloudKeys } from '../../config';
 
-const createMixesDbSearchUrl = (search: string, key: string): string => (
+const createMixesDbGoogleSearchUrl = (search: string, key: string): string => (
   'https://www.googleapis.com/customsearch/v1/siterestrict'
   + `?&key=${key}&cx=011544546440637270403%3Argrlx5occ_0&q=${search}`
 );
-const mixesDbTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
+const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
   data.map((title: MixesDbTitle) => title.link
     .slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '))
 );
@@ -32,6 +32,7 @@ const getRequests = (
 
 const findLink = (result: SoundcloudResults): string|null => {
   const resultWithLink = result.items.find((el) => el.link.includes('https://soundcloud.com/'));
+
   if (resultWithLink) {
     const { link } = resultWithLink;
     return link?.match(/\//g)?.length === 4 ? link : null;
@@ -45,8 +46,8 @@ const getSoundcloudLinkRequest = async (
 ): Promise<SoundcloudResult> => fetch(link.url)
   .then((data) => data.json())
   .then((jsonData) => {
-    console.log({ jsonData });
     const output = { title: link.title, url: findLink(jsonData) };
+
     return output;
   })
   .catch((error) => error);
@@ -71,19 +72,23 @@ export default async function handler(
   const searchString = `${artist} ${track}`;
 
   try {
-    const mixesDbSearchUrl = createMixesDbSearchUrl(
+    const mixesDbGoogleSearchUrl = createMixesDbGoogleSearchUrl(
       searchString,
       process.env.keygmixesdb as string,
     );
-    const mixesDbResults = await fetch(mixesDbSearchUrl);
+    const mixesDbResults = await fetch(mixesDbGoogleSearchUrl);
     const mixesDbResultsJson = await mixesDbResults.json();
-    const mixesDbResultsMixTitles = mixesDbTitles(mixesDbResultsJson.items);
+    const mixesDbResultsMixTitles = extractMixTitles(
+      mixesDbResultsJson.items,
+    );
 
-    const arrayOfSearches = getRequests(
+    const arrayOfSoundcloudGoogleSearchRequests = getRequests(
       mixesDbResultsMixTitles,
       soundcloudKeys,
     );
-    const soundcloudMixesLinks = await fetchAllUrls(arrayOfSearches);
+    const soundcloudMixesLinks = await fetchAllUrls(
+      arrayOfSoundcloudGoogleSearchRequests,
+    );
 
     res.status(200).json({
       name: 'Soundcloud mixes search',

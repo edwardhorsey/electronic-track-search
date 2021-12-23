@@ -12,6 +12,13 @@ import {
   GoogleSearchRequest,
 } from '../../types/types';
 import { soundcloudKeys } from '../../config';
+import { mockSoundcloudLinks } from '../../mocks/data';
+
+const removeEmptyObjectsFromArray = <T>(
+  array: T[],
+): T[] => array.filter((result) => (
+    Object.keys(result).length > 0
+  ));
 
 const createMixesDbGoogleSearchUrl = (search: string, key: string): string => (
   'https://www.googleapis.com/customsearch/v1/siterestrict'
@@ -90,9 +97,22 @@ export default async function handler(
       arrayOfSoundcloudGoogleSearchRequests,
     );
 
+    const cleanupSoundcloudMixResults = removeEmptyObjectsFromArray(
+      soundcloudMixResults,
+    );
+
+    const mixesResults = cleanupSoundcloudMixResults.length
+      ? cleanupSoundcloudMixResults
+      : mockSoundcloudLinks;
+
+    const state = cleanupSoundcloudMixResults.length
+      ? 'real'
+      : 'mock';
+
     res.status(200).json({
       name: 'Soundcloud mixes search',
-      mixesResults: soundcloudMixResults,
+      mixesResults,
+      state,
     });
   } catch (error) {
     // eslint-disable-next-line no-console

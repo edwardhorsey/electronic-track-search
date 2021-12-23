@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
-  SoundcloudMixResultsData,
+  MixesResultsData,
   MixesDbResultsError,
   MixesDbResults,
   SoundcloudResults,
@@ -66,7 +66,7 @@ const fetchAllUrls = async (array: GoogleSearchRequest[]) => {
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SoundcloudMixResultsData|MixesDbResultsError>,
+  res: NextApiResponse<MixesResultsData|MixesDbResultsError>,
 ) {
   const { artist, track } = req.query;
   const searchString = `${artist} ${track}`;
@@ -92,7 +92,7 @@ export default async function handler(
 
     res.status(200).json({
       name: 'Soundcloud mixes search',
-      soundcloudMixResults,
+      mixesResults: soundcloudMixResults,
     });
   } catch (error) {
     // eslint-disable-next-line no-console

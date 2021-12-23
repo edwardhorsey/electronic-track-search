@@ -73,9 +73,9 @@ export interface MixesDbResultsError {
   message: string;
   error: unknown;
 }
-export interface SoundcloudMixResultsData {
+export interface MixesResultsData {
   name: string;
-  soundcloudMixResults: SoundcloudMixResults[];
+  mixesResults: SoundcloudMixResults[];
 }
 
 export type MixesDbLink = string;

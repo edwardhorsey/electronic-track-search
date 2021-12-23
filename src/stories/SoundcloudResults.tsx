@@ -22,7 +22,17 @@ export const SoundcloudResults = ({
 
   if (error) return <ErrorMessage message={error.message} />;
 
-  if (!data) return <SkeletonLoader />;
+  if (!data) {
+    return (
+      <div className="w-full max-w-2xl h-full mx-auto md:overflow-y-auto">
+        <SkeletonLoader />
+        <SkeletonLoader />
+        <SkeletonLoader />
+        <SkeletonLoader />
+        <SkeletonLoader />
+      </div>
+    );
+  }
 
   const mixes = data.mixesResults;
 

@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         sans: ['Cochin', 'Georgia', 'Times', 'Times New Roman'],
       },
+      minHeight: {
+        '700': '700px',
+      },
     },
   },
   variants: {

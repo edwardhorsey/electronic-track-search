@@ -1,35 +1,55 @@
-import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import { ShowResults } from '../stories/ShowResults';
 
-const Track = (): JSX.Element => {
-  const router = useRouter();
-  const { artist, track } = router.query;
+interface TrackPageContainerProps {
+  children: JSX.Element;
+}
 
-  if (artist
+const TrackPageContainer = ({
+  children,
+}: TrackPageContainerProps): JSX.Element => (
+  <main
+    className="flex flex-col items-center justify-center
+      w-full flex-1 px-20 text-center md:h-screen min-h-700"
+  >
+    <h1 className="text-4xl font-bold">Track results</h1>
+    {children}
+  </main>
+);
+
+interface TrackProps {
+  artist: string;
+  track: string;
+}
+
+const Track = ({ artist, track }: TrackProps): JSX.Element => {
+  if (
+    artist
     && typeof artist === 'string'
     && track
     && typeof track === 'string'
   ) {
     return (
-      <main
-        className="flex flex-col items-center justify-center
-        w-full flex-1 px-20 text-center"
-      >
-        <h1 className="text-4xl font-bold">Track results</h1>
+      <TrackPageContainer>
         <ShowResults artist={artist} track={track} />
-      </main>
+      </TrackPageContainer>
     );
   }
 
   return (
-    <main
-      className="flex flex-col items-center justify-center
-      w-full flex-1 px-20 text-center"
-    >
-      <h1 className="text-4xl font-bold">Track results</h1>
+    <TrackPageContainer>
       <h2 className="text-2xl">Invalid query</h2>
-    </main>
+    </TrackPageContainer>
   );
 };
 
 export default Track;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
+  const { artist, track } = query;
+
+  return {
+    props: { artist, track },
+  };
+};

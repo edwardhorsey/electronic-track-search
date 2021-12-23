@@ -46,12 +46,48 @@ export interface YoutubeResultsData {
   youtubeResult: string;
 }
 
+export type SoundcloudResult = { link: string };
+
+export interface SoundcloudResults {
+  items: SoundcloudResult[];
+}
+
+export interface SoundcloudMixResults {
+  title: string;
+  url: string
+}
+
 export interface DiscogsResultsData {
   name: string;
   discogsResults: DiscogsResponse;
 }
 
+export type MixesDbResults = string[];
+
 export interface MixesDbResultsData {
   name: string;
-  mixesDbResults: string[];
+  mixesDbResults: MixesDbResults;
+}
+
+export interface MixesDbResultsError {
+  message: string;
+  error: unknown;
+}
+export interface MixesResultsData {
+  state: 'real' | 'mock',
+  name: string;
+  mixesResults: SoundcloudMixResults[];
+}
+
+export type MixesDbLink = string;
+export interface MixesDbTitle {
+  title: string;
+  link: MixesDbLink;
+}
+
+export type GoogleSearchKeys = string[];
+
+export interface GoogleSearchRequest {
+  title: string;
+  url: string;
 }

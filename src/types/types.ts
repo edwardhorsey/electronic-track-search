@@ -78,3 +78,10 @@ export interface MixesDbTitle {
   title: string;
   link: MixesDbLink;
 }
+
+export type GoogleSearchKeys = string[];
+
+export interface GoogleSearchRequest {
+  title: string;
+  url: string;
+}

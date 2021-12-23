@@ -8,9 +8,12 @@ import {
   SoundcloudResults,
   MixesDbLink,
   MixesDbTitle,
+  GoogleSearchKeys,
+  GoogleSearchRequest,
 } from '../../types/types';
+import { soundcloudKeys } from '../../config';
 
-const urlMixesDB = (search: string, key: string): string => (
+const createMixesDbSearchUrl = (search: string, key: string): string => (
   'https://www.googleapis.com/customsearch/v1/siterestrict'
   + `?&key=${key}&cx=011544546440637270403%3Argrlx5occ_0&q=${search}`
 );
@@ -18,26 +21,6 @@ const mixesDbTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
   data.map((title: MixesDbTitle) => title.link
     .slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '))
 );
-
-type GoogleSearchKeys = string[];
-
-interface GoogleSearchRequest {
-  title: string;
-  url: string;
-}
-
-const soundcloudKeys: GoogleSearchKeys = [
-  process.env.keyGoogleSc1 as string,
-  process.env.keyGoogleSc2 as string,
-  process.env.keyGoogleSc3 as string,
-  process.env.keyGoogleSc4 as string,
-  process.env.keyGoogleSc5 as string,
-  process.env.keyGoogleSc6 as string,
-  process.env.keyGoogleSc7 as string,
-  process.env.keyGoogleSc8 as string,
-  process.env.keyGoogleSc9 as string,
-  process.env.keyGoogleSc10 as string,
-];
 
 const getRequests = (
   array: MixesDbResults, keys: GoogleSearchKeys,
@@ -62,12 +45,13 @@ const getSoundcloudLinkRequest = async (
 ): Promise<SoundcloudResult> => fetch(link.url)
   .then((data) => data.json())
   .then((jsonData) => {
+    console.log({ jsonData });
     const output = { title: link.title, url: findLink(jsonData) };
     return output;
   })
   .catch((error) => error);
 
-const runSearch = async (array: GoogleSearchRequest[]) => {
+const fetchAllUrls = async (array: GoogleSearchRequest[]) => {
   const searches = [];
   for (let i = 0; i < array.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
@@ -76,17 +60,6 @@ const runSearch = async (array: GoogleSearchRequest[]) => {
   }
 
   return searches;
-};
-
-// request soundcloud links
-export const requestSC = async (
-  reqArray: MixesDbLink[],
-): Promise<SoundcloudResult[]> => {
-  const arrayOfTitles = reqArray;
-  const arrayOfSearches = getRequests(arrayOfTitles, soundcloudKeys);
-  const links = await runSearch(arrayOfSearches);
-
-  return links;
 };
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -98,13 +71,19 @@ export default async function handler(
   const searchString = `${artist} ${track}`;
 
   try {
-    const mixesDbResults = await fetch(
-      urlMixesDB(searchString, process.env.keygmixesdb as string),
+    const mixesDbSearchUrl = createMixesDbSearchUrl(
+      searchString,
+      process.env.keygmixesdb as string,
     );
+    const mixesDbResults = await fetch(mixesDbSearchUrl);
     const mixesDbResultsJson = await mixesDbResults.json();
     const mixesDbResultsMixTitles = mixesDbTitles(mixesDbResultsJson.items);
 
-    const soundcloudMixesLinks = await requestSC(mixesDbResultsMixTitles);
+    const arrayOfSearches = getRequests(
+      mixesDbResultsMixTitles,
+      soundcloudKeys,
+    );
+    const soundcloudMixesLinks = await fetchAllUrls(arrayOfSearches);
 
     res.status(200).json({
       name: 'Soundcloud mixes search',

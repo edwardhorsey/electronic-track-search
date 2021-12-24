@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { InputText } from './InputText';
 import { Button } from './Button';
-import uniqueId from '../utils/uniqueId';
+import { uniqueId } from '../utils/misc';
 import { SearchQuery } from '../types';
 
 const formIds = {

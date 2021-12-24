@@ -4,7 +4,7 @@ import { SearchQuery, MixesResultsData } from '../types';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';
-import uniqueId from '../utils/uniqueId';
+import { uniqueId } from '../utils/misc';
 
 interface SoundcloudPlayerProps {
   title: string;

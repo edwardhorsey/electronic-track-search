@@ -13,12 +13,7 @@ import {
 } from '../../types';
 import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
-
-const removeEmptyObjectsFromArray = <T>(
-  array: T[],
-): T[] => array.filter((result) => (
-    Object.keys(result).length > 0
-  ));
+import { removeEmptyObjectsFromArray } from '../../utils/misc';
 
 const createMixesDbGoogleSearchUrl = (search: string, key: string): string => (
   'https://www.googleapis.com/customsearch/v1/siterestrict'

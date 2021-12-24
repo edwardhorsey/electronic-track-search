@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   MixesResultsData,
-  MixesDbResultsError,
+  MixesResultsError,
   MixesDbResults,
   SoundcloudResults,
   SoundcloudMixResults,
@@ -73,7 +73,7 @@ const fetchAllUrls = async (array: GoogleSearchRequest[]) => {
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MixesResultsData|MixesDbResultsError>,
+  res: NextApiResponse<MixesResultsData|MixesResultsError>,
 ) {
   const { artist, track } = req.query;
   const searchString = `${artist} ${track}`;

@@ -62,6 +62,11 @@ export interface DiscogsResultsData {
   discogsResults: DiscogsResponse;
 }
 
+export interface DiscogsResultsError {
+  message: string;
+  error: unknown;
+}
+
 export type MixesDbResults = string[];
 
 export interface MixesDbResultsData {
@@ -69,10 +74,11 @@ export interface MixesDbResultsData {
   mixesDbResults: MixesDbResults;
 }
 
-export interface MixesDbResultsError {
+export interface MixesResultsError {
   message: string;
   error: unknown;
 }
+
 export interface MixesResultsData {
   state: 'real' | 'mock',
   name: string;

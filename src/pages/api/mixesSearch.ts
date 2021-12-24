@@ -11,7 +11,7 @@ import {
   GoogleSearchKeys,
   GoogleSearchRequest,
 } from '../../types';
-import { soundcloudKeys } from '../../config';
+import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
 
 const removeEmptyObjectsFromArray = <T>(
@@ -81,7 +81,7 @@ export default async function handler(
   try {
     const mixesDbGoogleSearchUrl = createMixesDbGoogleSearchUrl(
       searchString,
-      process.env.keygmixesdb as string,
+      keyGoogleSiteSearchMixesDb,
     );
     const mixesDbResults = await fetch(mixesDbGoogleSearchUrl);
     const mixesDbResultsJson = await mixesDbResults.json();

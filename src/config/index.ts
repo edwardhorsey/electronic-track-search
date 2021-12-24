@@ -15,4 +15,6 @@ export const soundcloudKeys: GoogleSearchKeys = [
 
 export const keyDiscogs = process.env.keydiscogs as string;
 
+export const keyYoutube = process.env.keygyoutube as string;
+
 export const keyGoogleSiteSearchMixesDb = process.env.keygmixesdb as string;

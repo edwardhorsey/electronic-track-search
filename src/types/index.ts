@@ -46,6 +46,11 @@ export interface YoutubeResultsData {
   youtubeResult: string;
 }
 
+export interface YoutubeResultsError {
+  message: string;
+  error: unknown;
+}
+
 export type SoundcloudResult = { link: string };
 
 export interface SoundcloudResults {

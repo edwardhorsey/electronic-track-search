@@ -4,8 +4,21 @@ import { SearchQuery, MixesResultsData } from '../types';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';
+import uniqueId from '../utils/uniqueId';
 
-let fakeKey = 0;
+interface SoundcloudPlayerProps {
+  title: string;
+  url: string;
+}
+
+export const SoundcloudPlayer = ({
+  title, url,
+}: SoundcloudPlayerProps): JSX.Element => (
+  <div className="my-2">
+    <h3 className="text-base lg:text-lg pb-1">{title}</h3>
+    <ReactPlayer height="130px" width="100%" url={url} />
+  </div>
+);
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 export interface SoundcloudResultsProps extends SearchQuery {}
@@ -39,13 +52,11 @@ export const SoundcloudResults = ({
   return (
     <div className="w-full max-w-2xl h-full mx-auto md:overflow-y-auto">
       {mixes.map((soundcloudMix) => {
-        fakeKey += 1;
-        const key = `fakeKey${fakeKey}`;
+        const key = uniqueId('soundcloud-mix');
+        const { title, url: mixUrl } = soundcloudMix;
+
         return (
-          <div className="my-2" key={key}>
-            <h3 className="text-base lg:text-lg pb-1">{soundcloudMix.title}</h3>
-            <ReactPlayer height="130px" width="100%" url={soundcloudMix.url} />
-          </div>
+          <SoundcloudPlayer key={key} title={title} url={mixUrl} />
         );
       })}
     </div>

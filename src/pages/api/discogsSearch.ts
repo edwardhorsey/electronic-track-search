@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { DiscogsResultsData, DiscogsResultsError } from '../../types/types';
+import { DiscogsResultsData, DiscogsResultsError } from '../../types';
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(

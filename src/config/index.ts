@@ -1,4 +1,4 @@
-import { GoogleSearchKeys } from '../types/types';
+import { GoogleSearchKeys } from '../types';
 
 export const soundcloudKeys: GoogleSearchKeys = [
   process.env.keyGoogleSc1 as string,

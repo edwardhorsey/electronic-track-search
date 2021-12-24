@@ -10,7 +10,7 @@ import {
   MixesDbTitle,
   GoogleSearchKeys,
   GoogleSearchRequest,
-} from '../../types/types';
+} from '../../types';
 import { soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
 

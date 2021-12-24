@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { SearchQuery, YoutubeResultsData } from '../types/types';
+import { SearchQuery, YoutubeResultsData } from '../types';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';

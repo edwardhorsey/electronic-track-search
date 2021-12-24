@@ -1,4 +1,4 @@
-import { DiscogsResponse } from '../types/types';
+import { DiscogsResponse } from '../types';
 
 export const discogsData: DiscogsResponse = {
   country: 'Germany',

@@ -1,4 +1,4 @@
-import { DiscogsResponse, DiscogsResultsReduced } from '../types/types';
+import { DiscogsResponse, DiscogsResultsReduced } from '../types';
 
 const filterDiscogsResults = (
   results: DiscogsResponse,

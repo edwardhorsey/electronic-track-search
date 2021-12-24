@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import ReactPlayer from 'react-player';
-import { SearchQuery, MixesResultsData } from '../types/types';
+import { SearchQuery, MixesResultsData } from '../types';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';

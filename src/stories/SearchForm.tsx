@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { InputText } from './InputText';
 import { Button } from './Button';
 import uniqueId from '../utils/uniqueId';
-import { SearchQuery } from '../types/types';
+import { SearchQuery } from '../types';
 
 const formIds = {
   artist: uniqueId('artist'),

@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { SearchQuery } from '../types/types';
+import { SearchQuery } from '../types';
 import SearchForm from './SearchForm';
 
 export default {

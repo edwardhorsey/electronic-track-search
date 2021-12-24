@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { SearchQuery, DiscogsResultsData } from '../types/types';
+import { SearchQuery, DiscogsResultsData } from '../types';
 import filterDiscogsResults from '../utils/filterDiscogsResults';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';

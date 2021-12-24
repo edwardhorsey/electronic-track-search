@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { YoutubeResultsData } from '../../types/types';
+import { YoutubeResultsData } from '../../types';
 
 const urlYoutube = (search: string, key: string): string => (
   'https://www.googleapis.com/youtube/v3/search?'

@@ -13,7 +13,7 @@ export default async function handler(
 
   try {
     // eslint-disable-next-line max-len
-    const url = `https://api.discogs.com/database/sear?q=${searchString}&token=${keyDiscogs}`;
+    const url = `https://api.discogs.com/database/search?q=${searchString}&token=${keyDiscogs}`;
 
     const response = await fetch(url);
     const data = await response.json();

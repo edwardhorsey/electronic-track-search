@@ -84,8 +84,10 @@ export interface MixesResultsError {
   error: unknown;
 }
 
+export type MixesResultsState = 'real' | 'mock'
+
 export interface MixesResultsData {
-  state: 'real' | 'mock',
+  state: MixesResultsState,
   name: string;
   mixesResults: SoundcloudMixResults[];
 }

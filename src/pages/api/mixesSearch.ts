@@ -4,25 +4,18 @@ import {
   MixesResultsData,
   MixesResultsError,
   MixesDbResults,
-  SoundcloudResults,
   SoundcloudMixResults,
-  MixesDbLink,
-  MixesDbTitle,
   GoogleSearchKeys,
   GoogleSearchRequest,
+  MixesResultsState,
 } from '../../types';
 import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
-import { removeEmptyObjectsFromArray } from '../../utils/misc';
-
-const createMixesDbGoogleSearchUrl = (search: string, key: string): string => (
-  'https://www.googleapis.com/customsearch/v1/siterestrict'
-  + `?&key=${key}&cx=011544546440637270403%3Argrlx5occ_0&q=${search}`
-);
-const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
-  data.map((title: MixesDbTitle) => title.link
-    .slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '))
-);
+import {
+  removeEmptyObjectsFromArray,
+  extractMixTitles,
+  findLinkFromSoundcloudDomain,
+} from '../../utils/misc';
 
 const getRequests = (
   array: MixesDbResults, keys: GoogleSearchKeys,
@@ -32,23 +25,15 @@ const getRequests = (
   url: `https://www.googleapis.com/customsearch/v1?siterequest?&key=${keys[index]}&cx=011544546440637270403%3Aqlxjbhczn6i&q=${el}`,
 }));
 
-const findLink = (result: SoundcloudResults): string|null => {
-  const resultWithLink = result.items.find((el) => el.link.includes('https://soundcloud.com/'));
-
-  if (resultWithLink) {
-    const { link } = resultWithLink;
-    return link?.match(/\//g)?.length === 4 ? link : null;
-  }
-
-  return null;
-};
-
 const getSoundcloudLinkRequest = async (
   link: GoogleSearchRequest,
 ): Promise<SoundcloudMixResults> => fetch(link.url)
   .then((data) => data.json())
   .then((jsonData) => {
-    const output = { title: link.title, url: findLink(jsonData) };
+    const output = {
+      title: link.title,
+      url: findLinkFromSoundcloudDomain(jsonData),
+    };
 
     return output;
   })
@@ -62,7 +47,7 @@ const fetchAllUrls = async (array: GoogleSearchRequest[]) => {
     searches.push(search);
   }
 
-  return searches;
+  return removeEmptyObjectsFromArray(searches);
 };
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -74,10 +59,8 @@ export default async function handler(
   const searchString = `${artist} ${track}`;
 
   try {
-    const mixesDbGoogleSearchUrl = createMixesDbGoogleSearchUrl(
-      searchString,
-      keyGoogleSiteSearchMixesDb,
-    );
+    // eslint-disable-next-line max-len
+    const mixesDbGoogleSearchUrl = `https://www.googleapis.com/customsearch/v1/siterestrict?&key=${keyGoogleSiteSearchMixesDb}&cx=011544546440637270403%3Argrlx5occ_0&q=${searchString}`;
     const mixesDbResults = await fetch(mixesDbGoogleSearchUrl);
     const mixesDbResultsJson = await mixesDbResults.json();
     const mixesDbResultsMixTitles = extractMixTitles(
@@ -92,17 +75,13 @@ export default async function handler(
       arrayOfSoundcloudGoogleSearchRequests,
     );
 
-    const cleanupSoundcloudMixResults = removeEmptyObjectsFromArray(
-      soundcloudMixResults,
-    );
+    let mixesResults = soundcloudMixResults;
+    let state: MixesResultsState = 'real';
 
-    const mixesResults = cleanupSoundcloudMixResults.length
-      ? cleanupSoundcloudMixResults
-      : mockSoundcloudLinks;
-
-    const state = cleanupSoundcloudMixResults.length
-      ? 'real'
-      : 'mock';
+    if (!soundcloudMixResults.length) {
+      mixesResults = mockSoundcloudLinks;
+      state = 'mock';
+    }
 
     res.status(200).json({
       name: 'Soundcloud mixes search',

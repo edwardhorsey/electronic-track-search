@@ -9,10 +9,9 @@ export default async function handler(
   res: NextApiResponse<DiscogsResultsData|DiscogsResultsError>,
 ) {
   const { artist, track } = req.query;
-  const searchString = `${artist} ${track}`;
+  const searchString = encodeURIComponent(`${artist} ${track}`);
 
   try {
-    // eslint-disable-next-line max-len
     const url = `https://api.discogs.com/database/search?q=${searchString}&token=${keyDiscogs}`;
 
     const response = await fetch(url);

@@ -30,7 +30,16 @@
         ]
       }
     ],
-    "max-len": ["error", { "code": 120 }, 4, { "ignoreStrings": true }],
+    "max-len": [
+      "error",
+      { "code": 120 },
+      4,
+      {
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
     "no-use-before-define": "off",
     "import/extensions": [
       "error",

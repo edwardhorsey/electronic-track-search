@@ -9,10 +9,9 @@ export default async function handler(
   res: NextApiResponse<YoutubeResultsData|YoutubeResultsError>,
 ) {
   const { artist, track } = req.query;
-  const searchString = `${artist} ${track}`;
+  const searchString = encodeURIComponent(`${artist} ${track}`);
 
   try {
-    // eslint-disable-next-line max-len
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${keyYoutube}&type=video&q=${searchString}`;
     const response = await fetch(url);
     const data = await response.json();

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Title from '../stories/Title';
-import { SearchQuery } from '../types/types';
+import { SearchQuery } from '../types';
 import SearchForm from '../stories/SearchForm';
 
 export default function Home(): JSX.Element {

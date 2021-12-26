@@ -1,6 +1,5 @@
 import useSWR from 'swr';
-import { SearchQuery, DiscogsResultsData } from '../types/types';
-import filterDiscogsResults from '../utils/filterDiscogsResults';
+import { SearchQuery, DiscogsResultsData } from '../types';
 import getTrackResults from '../utils/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';
@@ -22,11 +21,11 @@ export const DiscogsResults = ({
 
   if (!data) return <SkeletonLoader type="Discogs" />;
 
-  const results = filterDiscogsResults(data.discogsResults);
+  const results = data.discogsResults;
 
   const {
     title,
-    coverImage,
+    cover_image: coverImage,
     label,
     country,
     year,

@@ -1,29 +1,41 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { YoutubeResultsData } from '../../types/types';
-
-const urlYoutube = (search: string, key: string): string => (
-  'https://www.googleapis.com/youtube/v3/search?'
-  + `part=snippet&key=${key}&type=video&q=${search}`
-);
+import { YoutubeResultsData, YoutubeResultsError } from '../../types';
+import { keyYoutube } from '../../config';
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<YoutubeResultsData>,
+  res: NextApiResponse<YoutubeResultsData|YoutubeResultsError>,
 ) {
   const { artist, track } = req.query;
-  const searchString = `${artist} ${track}`;
+  const searchString = encodeURIComponent(`${artist} ${track}`);
 
-  const youtubeResult = await fetch(
-    urlYoutube(searchString, process.env.keygyoutube as string),
-  )
-    .then((data) => data.json())
-    .then((jsonData) => jsonData.items[0].id.videoId)
-    .catch((error) => error);
+  try {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${keyYoutube}&type=video&q=${searchString}`;
+    const response = await fetch(url);
+    const data = await response.json();
 
-  res.status(200).json({
-    name: 'Youtube search',
-    youtubeResult,
-  });
+    if (response.ok && data?.items.length) {
+      const { videoId } = data.items[0].id;
+
+      res.status(200).json({
+        name: 'Youtube search',
+        youtubeResult: videoId,
+      });
+    } else {
+      res.status(404).json({
+        message: 'Failed to get youtube data',
+        error: data,
+      });
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+
+    res.status(404).json({
+      message: 'Failed to get youtube data',
+      error,
+    });
+  }
 }

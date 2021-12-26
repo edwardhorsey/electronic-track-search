@@ -1,4 +1,4 @@
-import { SearchQuery } from '../types/types';
+import { SearchQuery } from '../types';
 import { DiscogsResults } from './DiscogsResults';
 import { SoundcloudResults } from './SoundcloudResults';
 import { YoutubeResult } from './YoutubeResult';

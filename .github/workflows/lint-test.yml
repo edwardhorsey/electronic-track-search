@@ -13,7 +13,9 @@ jobs:
         node-version: 14.x
     - name: Install NPM packages
       run: yarn
+    - name: Check types
+      run: yarn lint
     - name: Run linter
-      run: npm run lint
+      run: yarn lint
     - name: Run tests
-      run: npm run test
+      run: yarn test

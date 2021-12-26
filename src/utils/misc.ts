@@ -1,5 +1,5 @@
 import {
-  MixesDbLink, MixesDbTitle, SoundcloudResults,
+  MixesDbLink, MixesDbTitle, SoundcloudResult,
 } from '../types';
 
 export const uniqueId = ((): ((prefix: string) => string) => {
@@ -24,9 +24,9 @@ export const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
 );
 
 export const findLinkFromSoundcloudDomain = (
-  result: SoundcloudResults,
+  items: SoundcloudResult[],
 ): string|null => {
-  const resultWithLink = result?.items.find((el) => el?.link.includes('https://soundcloud.com/'));
+  const resultWithLink = items.find((el) => el?.link.includes('https://soundcloud.com/'));
 
   if (resultWithLink) {
     const { link } = resultWithLink;

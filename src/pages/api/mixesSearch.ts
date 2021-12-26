@@ -9,6 +9,7 @@ import {
   GoogleSearchRequest,
   MixesResultsState,
   MixesDbLink,
+  MixesDbResultsData,
 } from '../../types';
 import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
@@ -17,6 +18,9 @@ import {
   extractMixTitles,
   findLinkFromSoundcloudDomain,
 } from '../../utils/misc';
+
+// const customSoundcloudOnlySearchVY = '011544546440637270403%3Aqlxjbhczn6i';
+// const customSoundcloudMixcloudSiteSearchCY = '33af1a4cebf19519a';
 
 const getMixTitlesFromMixesdbResults = async (
   search: string,
@@ -37,47 +41,76 @@ const getMixTitlesFromMixesdbResults = async (
   }
 };
 
-const getRequests = (
+const createSoundcloudGoogleSearchRequests = (
   array: MixesDbResults, keys: GoogleSearchKeys,
 ): GoogleSearchRequest[] => array.map((mixTitle, index) => ({
   title: mixTitle,
   // eslint-disable-next-line max-len
-  url: `https://www.googleapis.com/customsearch/v1?siterequest?&key=${keys[index]}&cx=011544546440637270403%3Aqlxjbhczn6i&q=${mixTitle}`,
+  url: `https://www.googleapis.com/customsearch/v1?siterequest?&key=${keys[index]}&cx=33af1a4cebf19519a&q=${mixTitle}`,
 }));
 
-const getSoundcloudLinkRequest = async (
+const getSoundcloudLinkPromise = async (
   link: GoogleSearchRequest,
-): Promise<any> => {
-  const { title: mixTitle, url: mixUrl } = link;
-  const response = await fetch(mixUrl);
-  const data = await response.json();
-  console.log({ data });
+): Promise<SoundcloudMixResults> => {
+  try {
+    const { title: mixTitle, url: mixUrl } = link;
+    const response = await fetch(mixUrl);
+    const data = await response.json();
+    console.log({ data });
 
-  if (response.ok) {
-    const output = {
-      title: mixTitle,
-      url: findLinkFromSoundcloudDomain(data),
-    };
-    console.log(output);
+    if (
+      response.ok
+      && Number(data.searchInformation.totalResults) > 0
+      && data?.items
+    ) {
+      const soundcloudMixLink = findLinkFromSoundcloudDomain(data.items);
 
-    return output;
+      if (soundcloudMixLink) {
+        const output = {
+          title: mixTitle,
+          url: soundcloudMixLink,
+        };
+
+        return Promise.resolve(output);
+      }
+    }
+
+    return Promise.reject(data);
+  } catch (error) {
+    return Promise.reject(error);
   }
-
-  return {};
 };
 
-const fetchAllUrls = async (
+const fetchAllRequests = async (
   array: GoogleSearchRequest[],
 ): Promise<SoundcloudMixResults[]> => {
   const searches = [];
   for (let i = 0; i < array.length; i += 1) {
     // eslint-disable-next-line no-await-in-loop
-    const search = await getSoundcloudLinkRequest(array[i]);
+    const search = getSoundcloudLinkPromise(array[i]);
     console.log({ search });
     searches.push(search);
   }
 
-  return removeEmptyObjectsFromArray(searches);
+  const settled = await Promise.allSettled(searches);
+  console.log({ settled });
+
+  const fulfilledPromises = settled.filter((promise) => promise.status === 'fulfilled');
+  console.log(fulfilledPromises);
+
+  const reducedPromises = settled.reduce((
+    acc: SoundcloudMixResults[],
+    promise: PromiseSettledResult<SoundcloudMixResults>,
+  ) => {
+    if (promise.status === 'fulfilled' && promise?.value) {
+      return [...acc, promise.value];
+    }
+
+    return acc;
+  }, []);
+  console.log({ reducedPromises });
+
+  return reducedPromises;
 };
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -86,22 +119,23 @@ export default async function handler(
   res: NextApiResponse<MixesResultsData|MixesResultsError>,
 ) {
   const { artist, track } = req.query;
-  const searchString = `${artist} ${track}`;
+  const searchString = encodeURIComponent(`${artist} ${track}`);
 
   try {
     const mixTitlesFromMixesdbResults = await getMixTitlesFromMixesdbResults(
       searchString,
     );
-    const justOne = [mixTitlesFromMixesdbResults[1]];
-    console.log({ justOne });
+    const justOne = mixTitlesFromMixesdbResults.slice(2, 4);
+    console.log({ justOne, length: justOne.length });
 
-    const arrayOfSoundcloudGoogleSearchRequests = getRequests(
+    const soundcloudGoogleSearchRequests = createSoundcloudGoogleSearchRequests(
       justOne,
       soundcloudKeys,
     );
-    console.log({ arrayOfSoundcloudGoogleSearchRequests });
-    const soundcloudMixResults = await fetchAllUrls(
-      arrayOfSoundcloudGoogleSearchRequests,
+    console.log({ soundcloudGoogleSearchRequests });
+
+    const soundcloudMixResults = await fetchAllRequests(
+      soundcloudGoogleSearchRequests,
     );
 
     let mixesResults = soundcloudMixResults;

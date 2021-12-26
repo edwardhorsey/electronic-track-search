@@ -59,7 +59,7 @@ export interface SoundcloudResults {
 
 export interface SoundcloudMixResults {
   title: string;
-  url: string|null;
+  url: string;
 }
 
 export interface DiscogsResultsData {

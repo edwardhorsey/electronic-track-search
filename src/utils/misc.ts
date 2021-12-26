@@ -26,7 +26,7 @@ export const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] => (
 export const findLinkFromSoundcloudDomain = (
   result: SoundcloudResults,
 ): string|null => {
-  const resultWithLink = result.items.find((el) => el.link.includes('https://soundcloud.com/'));
+  const resultWithLink = result?.items.find((el) => el?.link.includes('https://soundcloud.com/'));
 
   if (resultWithLink) {
     const { link } = resultWithLink;

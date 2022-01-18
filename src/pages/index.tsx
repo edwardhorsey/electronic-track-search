@@ -32,16 +32,16 @@ export default function Home(): JSX.Element {
         <SearchForm onSubmit={onSubmit} />
       </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
+      <footer className="flex items-center justify-center w-full h-10 md:h-12">
         <a
-          className="flex items-center justify-center"
+          className="flex items-center justify-center text-gray-700 text-sm md:text-base"
           href="https://github.com/edwardhorsey/ets"
           target="_blank"
           rel="noopener noreferrer"
         >
           Made by Ed Horsey
-          <span>
-            <Image src="/vercel.svg" alt="Github Logo" width={72} height={16} />
+          <span className="ml-2 mt-1">
+            <Image className="rounded-full" src="/58594573.jpeg" alt="Ned" width={20} height={20} />
           </span>
         </a>
       </footer>

@@ -19,10 +19,10 @@ const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="form my-6 text-left"
+      className="form my-6 text-left w-full xs:w-5/6"
       aria-label="form"
     >
-      <div className="flex flex-col sm:flex-row justify-center mt-6">
+      <div className="flex flex-col sm:flex-row justify-center md:mt-6">
         <InputText
           id={formIds.artist}
           label="Artist"

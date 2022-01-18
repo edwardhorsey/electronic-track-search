@@ -1,7 +1,6 @@
 # Electronic Track Search
 ### Website built in Next.js to search for a track and discover what DJ mixes it appears in
 ## 💽🎛🎚💽
-<hr>
 
 ### Visit  [electronictracksearch.com](https://www.electronictracksearch.com)
 <br />

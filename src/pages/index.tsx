@@ -32,7 +32,6 @@ export default function Home(): JSX.Element {
         <SearchForm onSubmit={onSubmit} />
       </main>
 
-      a
       <footer className="flex items-center justify-center w-full h-24 border-t">
         <a
           className="flex items-center justify-center text-gray-700"

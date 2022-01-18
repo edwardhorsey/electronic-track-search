@@ -30,7 +30,7 @@ export const InputText = ({
   <div className="flex flex-col mb-2">
     <label
       htmlFor={id}
-      className="flex flex-col ml-3 text-base sm:text-lg"
+      className="flex flex-col mx-3 xs:mr-0 text-base sm:text-lg"
     >
       <span className="pl-1">{label}</span>
       <input

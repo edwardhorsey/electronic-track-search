@@ -10,9 +10,9 @@ const TrackPageContainer = ({
 }: TrackPageContainerProps): JSX.Element => (
   <main
     className="flex flex-col items-center justify-center
-      w-full flex-1 px-20 text-center md:h-screen min-h-700"
+      w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700"
   >
-    <h1 className="text-4xl font-bold">Track results</h1>
+    <h1 className="text-4xl font-bold py-3">Track results</h1>
     {children}
   </main>
 );

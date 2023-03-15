@@ -1,6 +1,5 @@
 module.exports = {
-  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/stories/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/stories/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -19,9 +18,6 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };

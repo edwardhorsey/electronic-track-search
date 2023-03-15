@@ -1,52 +1,57 @@
 {
-  "name": "ets",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "check:types": "./node_modules/.bin/tsc --pretty --noEmit",
-    "storybook": "npx start-storybook -s public -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "dependencies": {
-    "msw": "^0.33.3",
-    "msw-storybook-addon": "^1.2.0",
-    "next": "^13.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.10.1",
-    "react-player": "^2.9.0",
-    "swr": "^0.5.6"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@storybook/addon-actions": "^6.4.0-alpha.21",
-    "@storybook/addon-essentials": "^6.4.0-alpha.21",
-    "@storybook/addon-links": "^6.4.0-alpha.21",
-    "@storybook/react": "^6.4.0-alpha.21",
-    "@testing-library/dom": "^8.1.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@types/react": "^17.0.11",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "autoprefixer": "^10.4.14",
-    "babel-jest": "^27.0.6",
-    "babel-loader": "^8.2.2",
-    "eslint": "7.29.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-next": "^13.2.4",
-    "jest": "^27.0.6",
-    "postcss": "^8.4.21",
-    "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^3.2.7",
-    "typescript": "4.3.4"
-  },
-  "msw": {
-    "workerDirectory": "public"
-  }
+    "name": "ets",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "test": "jest",
+        "check:types": "./node_modules/.bin/tsc --pretty --noEmit",
+        "storybook": "npx start-storybook -s public -p 6006",
+        "build-storybook": "build-storybook",
+        "lint:fix": "yarn prettier --write ./ && yarn eslint --fix --ignore-path .prettierignore ./"
+    },
+    "dependencies": {
+        "msw": "^0.33.3",
+        "msw-storybook-addon": "^1.2.0",
+        "next": "^13.2.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-hook-form": "^7.10.1",
+        "react-player": "^2.9.0",
+        "swr": "^0.5.6"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.14.8",
+        "@storybook/addon-actions": "^6.4.0-alpha.21",
+        "@storybook/addon-essentials": "^6.4.0-alpha.21",
+        "@storybook/addon-links": "^6.4.0-alpha.21",
+        "@storybook/react": "^6.4.0-alpha.21",
+        "@testing-library/dom": "^8.1.0",
+        "@testing-library/jest-dom": "^5.14.1",
+        "@testing-library/react": "^12.0.0",
+        "@types/react": "^17.0.11",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
+        "autoprefixer": "^10.4.14",
+        "babel-jest": "^27.0.6",
+        "babel-loader": "^8.2.2",
+        "eslint": "7.29.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-next": "^13.2.4",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "jest": "^27.0.6",
+        "postcss": "^8.4.21",
+        "postcss-flexbugs-fixes": "^4.2.1",
+        "postcss-preset-env": "^6.7.0",
+        "tailwindcss": "^3.2.7",
+        "typescript": "4.3.4"
+    },
+    "msw": {
+        "workerDirectory": "public"
+    }
 }

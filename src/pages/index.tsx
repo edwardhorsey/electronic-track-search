@@ -14,19 +14,13 @@ export default function Home(): JSX.Element {
         });
 
     return (
-        <div
-            className="flex flex-col items-center justify-center
-      min-h-screen"
-        >
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <Head>
                 <title>Electronic Track Search</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main
-                className="flex flex-col items-center justify-center
-        w-full flex-1 px-5 sm:px-15 md:px-20"
-            >
+            <main className="flex flex-col items-center justify-center w-full flex-1 px-5 sm:px-15 md:px-20">
                 <Title />
                 <SearchForm onSubmit={onSubmit} />
             </main>

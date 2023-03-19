@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { SearchQuery } from '../types';
+import { FieldValues } from 'react-hook-form';
 import SearchForm from './SearchForm';
 
 export default {
@@ -7,10 +7,10 @@ export default {
     component: SearchForm,
 } as Meta;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onSubmit = (data: SearchQuery): any => {
-    // eslint-disable-next-line no-alert
+const onSubmit = (data: FieldValues): Promise<boolean> => {
     alert(`Form submitted: ${JSON.stringify(data)})`);
+
+    return new Promise((res) => res(true));
 };
 
 const Template: Story = () => <SearchForm onSubmit={onSubmit} />;

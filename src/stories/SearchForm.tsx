@@ -1,8 +1,7 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { InputText } from './InputText';
 import { Button } from './Button';
 import { uniqueId } from '../utils/misc';
-import { SearchQuery } from '../types';
 
 const formIds = {
     artist: uniqueId('artist'),
@@ -10,7 +9,7 @@ const formIds = {
 };
 
 interface SearchFormProps {
-    onSubmit: (values: SearchQuery) => Promise<boolean>;
+    onSubmit: (values: FieldValues) => Promise<boolean>;
 }
 
 const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {

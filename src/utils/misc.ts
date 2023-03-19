@@ -10,11 +10,13 @@ export const uniqueId = ((): ((prefix: string) => string) => {
     };
 })();
 
-export const removeEmptyObjectsFromArray = <T>(array: T[]): T[] =>
-    array.filter((result) => Object.keys(result).length > 0);
+export const removeEmptyObjectsFromArray = <T>(array: T[]): T[] => {
+    return array.filter((result) => result && Object.keys(result).length > 0);
+};
 
-export const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] =>
-    data.map((title: MixesDbTitle) => title.link.slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '));
+export const extractMixTitles = (data: MixesDbTitle[]): MixesDbLink[] => {
+    return data.map((title: MixesDbTitle) => title.link.slice(title.link.indexOf('/w/') + 16).replace(/_/g, ' '));
+};
 
 export const findLinkFromSoundcloudDomain = (items: SoundcloudResult[]): string | null => {
     const resultWithLink = items.find((el) => el?.link.includes('https://soundcloud.com/'));

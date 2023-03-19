@@ -2,16 +2,17 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Title from '../stories/Title';
-import { SearchQuery } from '../types';
 import SearchForm from '../stories/SearchForm';
+import { FieldValues } from 'react-hook-form';
 
 export default function Home(): JSX.Element {
     const router = useRouter();
-    const onSubmit = (values: SearchQuery): Promise<boolean> =>
-        router.push({
+    const onSubmit = (values: FieldValues): Promise<boolean> => {
+        return router.push({
             pathname: '/track',
             query: { ...values },
         });
+    };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">

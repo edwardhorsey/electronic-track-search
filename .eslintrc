@@ -1,6 +1,6 @@
 {
     "ignorePatterns": [".prettierignore"],
-    "extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+    "extends": ["plugin:@next/next/recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
     "plugins": ["@typescript-eslint", "unused-imports", "prettier"],
     "rules": {
         "prettier/prettier": "error",

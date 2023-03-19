@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { DiscogsResponse } from '../types';
 import { ErrorMessage } from './ErrorMessage';
 
@@ -18,10 +19,12 @@ export const DiscogsResults = ({ discogsResult }: DiscogsResultsProps): JSX.Elem
             <div className="flex flex-col items-center md:flex-row md:items-start">
                 {coverImage && (
                     <div className="w-4/5 md:w-2/4 h-auto">
-                        <img
+                        <Image
                             src={coverImage}
                             alt={`${title} cover`}
                             className="max-h-60 max-w-60 sm:max-h-72 sm:max-w-72 lg:max-h-96 lg:max-w-96 mx-auto md:ml-auto md:mr-0"
+                            width={384}
+                            height={384}
                         />
                     </div>
                 )}

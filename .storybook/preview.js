@@ -1,5 +1,5 @@
 import '../src/styles/globals.css';
-import { addDecorator } from '@storybook/react';
+// import { addDecorator } from '@storybook/react';
 import { initializeWorker, mswDecorator } from 'msw-storybook-addon';
 
 export const parameters = {
@@ -13,4 +13,4 @@ export const parameters = {
 };
 
 initializeWorker();
-addDecorator(mswDecorator);
+// addDecorator(mswDecorator);

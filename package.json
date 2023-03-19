@@ -11,7 +11,7 @@
         "check:types": "./node_modules/.bin/tsc --pretty --noEmit",
         "storybook": "npx start-storybook -s public -p 6006",
         "build-storybook": "build-storybook",
-        "lint:fix": "yarn prettier --write ./ && yarn eslint --fix --ignore-path .prettierignore ./"
+        "lint:fix": "yarn prettier --write . && yarn eslint --fix --ignore-path .prettierignore ."
     },
     "dependencies": {
         "msw": "^0.33.3",

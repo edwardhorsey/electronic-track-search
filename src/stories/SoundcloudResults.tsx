@@ -18,8 +18,7 @@ export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Ele
     </div>
 );
 
-/* eslint-disable @typescript-eslint/no-empty-interface */
-export interface SoundcloudResultsProps extends SearchQuery {}
+export type SoundcloudResultsProps = SearchQuery;
 
 export const SoundcloudResults = ({ artist, track }: SoundcloudResultsProps): JSX.Element => {
     const url = `/api/mixesSearch/?artist=${artist}&track=${track}`;

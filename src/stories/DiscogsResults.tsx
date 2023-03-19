@@ -1,23 +1,16 @@
-import useSWR from 'swr';
-import { SearchQuery, DiscogsResultsData } from '../types';
-import getTrackResults from '../utils/getTrackResults';
+import { DiscogsResponse } from '../types';
 import { ErrorMessage } from './ErrorMessage';
-import { SkeletonLoader } from './SkeletonLoader';
 
-/* eslint-disable @typescript-eslint/no-empty-interface */
-export interface DiscogsResultsProps extends SearchQuery {}
+export interface DiscogsResultsProps {
+    discogsResult?: DiscogsResponse;
+}
 
-export const DiscogsResults = ({ artist, track }: DiscogsResultsProps): JSX.Element => {
-    const url = `/api/discogsSearch/?artist=${artist}&track=${track}`;
-    const { data, error } = useSWR(url, () => getTrackResults<DiscogsResultsData>(url));
+export const DiscogsResults = ({ discogsResult }: DiscogsResultsProps): JSX.Element => {
+    discogsResult;
 
-    if (error) return <ErrorMessage message={error.message} />;
+    if (!discogsResult) return <ErrorMessage message={'Could not find Discogs result'} />;
 
-    if (!data) return <SkeletonLoader type="Discogs" />;
-
-    const results = data.discogsResults;
-
-    const { title, cover_image: coverImage, label, country, year, style, format } = results;
+    const { title, cover_image: coverImage, label, country, year, style, format } = discogsResult;
 
     return (
         <div className="p-2 sm:px-5 sm:pt-0">
@@ -28,8 +21,7 @@ export const DiscogsResults = ({ artist, track }: DiscogsResultsProps): JSX.Elem
                         <img
                             src={coverImage}
                             alt={`${title} cover`}
-                            className="max-h-60 max-w-60 sm:max-h-72 sm:max-w-72
-              lg:max-h-96 lg:max-w-96 mx-auto md:ml-auto md:mr-0"
+                            className="max-h-60 max-w-60 sm:max-h-72 sm:max-w-72 lg:max-h-96 lg:max-w-96 mx-auto md:ml-auto md:mr-0"
                         />
                     </div>
                 )}

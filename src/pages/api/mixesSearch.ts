@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
     MixesResultsData,
@@ -22,7 +21,6 @@ const getMixTitlesFromMixesdbResults = async (search: string): Promise<MixesDbLi
 
         return mixesTitles;
     } catch (error) {
-        // eslint-disable-next-line no-console
         console.log(error);
 
         return [];
@@ -82,7 +80,6 @@ const fetchAllRequests = async (requests: GoogleSearchRequest[]): Promise<Soundc
     return fulfilledPromiseValues;
 };
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<MixesResultsData | MixesResultsError>) {
     const { artist, track } = req.query;
     const searchString = encodeURIComponent(`${artist} ${track}`);
@@ -106,7 +103,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             state,
         });
     } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(error);
 
         res.status(404).json({

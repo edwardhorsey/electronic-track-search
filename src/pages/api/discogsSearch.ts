@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { DiscogsResultsData, DiscogsResultsError } from '../../types';
 import { keyDiscogs } from '../../config';
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<DiscogsResultsData | DiscogsResultsError>,
@@ -31,7 +29,6 @@ export default async function handler(
             });
         }
     } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(error);
 
         res.status(404).json({

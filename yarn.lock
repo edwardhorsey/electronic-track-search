@@ -9099,6 +9099,11 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz#26c8a3cee6cc05fbcf1e333cd2fc3e003326c0b5"
   integrity sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==
 
+next-router-mock@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.2.tgz#750341ea0bab9fa04257fb38a85bbe5c25dc19e5"
+  integrity sha512-rh6Mq1xhZ4Y0y9Z3seHZ04k4dAKnAyRcis7q3ZUF+Xp0uBeNqPC8Ydw5DldYncN3o1sYBqRyz25F/v/kfcg0/Q==
+
 next@^13.2.4:
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/next/-/next-13.2.4.tgz#2363330392b0f7da02ab41301f60857ffa7f67d6"

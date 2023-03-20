@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Title from '../components/Title';
 import SearchForm from '../components/SearchForm';
 import { FieldValues } from 'react-hook-form';
+import MetaData from '../components/MetaData';
 
 export default function Home(): JSX.Element {
     const router = useRouter();
@@ -19,6 +20,7 @@ export default function Home(): JSX.Element {
             <Head>
                 <title>Electronic Track Search</title>
                 <link rel="icon" href="/favicon.ico" />
+                <MetaData />
             </Head>
 
             <main className="flex flex-col items-center justify-center w-full flex-1 px-5 sm:px-15 md:px-20">

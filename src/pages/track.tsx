@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { ShowResults } from '../stories/ShowResults';
+import { ShowResults } from '../components/ShowResults';
 import { DiscogsResponse } from '../types';
 import { getDiscogsData } from '../utils/discogs';
 import { getYoutubeData } from '../utils/youtube';

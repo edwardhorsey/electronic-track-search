@@ -1,4 +1,3 @@
-import React from 'react';
 import { UseFormRegister, FieldValues, DeepMap, FieldErrors } from 'react-hook-form';
 
 export interface InputTextProps {
@@ -27,9 +26,7 @@ export const InputText = ({
             <span className="pl-1">{label}</span>
             <input
                 type="text"
-                className="border border-slate-200 p-2 mt-1 mb-1
-        rounded-lg text-base sm:text-lg appearance-none
-        focus:outline-none focus:border-slate-500"
+                className="border border-slate-200 p-2 mt-1 mb-1 rounded-lg text-base sm:text-lg appearance-none focus:outline-none focus:border-slate-500"
                 id={id}
                 placeholder={placeholder}
                 {...register(name, { required })}

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import SearchForm from '../src/stories/SearchForm';
+import SearchForm from '../src/components/SearchForm';
 
 describe('Home', () => {
     it('Form should throw validation error if one input empty', async () => {

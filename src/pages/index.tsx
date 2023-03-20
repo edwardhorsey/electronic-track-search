@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Title from '../stories/Title';
-import SearchForm from '../stories/SearchForm';
+import Title from '../components/Title';
+import SearchForm from '../components/SearchForm';
 import { FieldValues } from 'react-hook-form';
 
 export default function Home(): JSX.Element {

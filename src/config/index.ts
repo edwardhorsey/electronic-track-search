@@ -19,8 +19,6 @@ const keyYoutube = process.env.keygyoutube as string;
 
 const keyGoogleSiteSearchMixesDb = process.env.keygmixesdb as string;
 
-console.log(soundcloudKeys.filter(Boolean).length === 0, !keyDiscogs, !keyYoutube, !keyGoogleSiteSearchMixesDb);
-
 if (
     typeof window === 'undefined' &&
     (soundcloudKeys.filter(Boolean).length === 0 || !keyDiscogs || !keyYoutube || !keyGoogleSiteSearchMixesDb)
@@ -31,7 +29,7 @@ if (
 export { soundcloudKeys, keyDiscogs, keyYoutube, keyGoogleSiteSearchMixesDb };
 
 export const description =
-    'A search engine for music & tracks played in DJ sets. Find DJ mixes which feature a track. Search for a track - Receive release information - Receive mixes featuring the track';
+    'A search engine for tracks played in DJ sets - find mixes which feature a track. Search for a track - Receive release information - Receive mixes featuring the track';
 export const favicon = '/favicon.ico';
 export const ogImage = 'https://www.electronictracksearch.com/og.jpeg';
 export const siteUrl = 'https://www.electronictracksearch.com/';

@@ -6,6 +6,7 @@ import { ShowResults } from '../components/ShowResults';
 import { DiscogsResponse } from '../types';
 import { getDiscogsData } from '../utils/discogs';
 import { getYoutubeData } from '../utils/youtube';
+import { trimMultipleWhitespaces } from '../utils/misc';
 
 interface TrackProps {
     artist: string;
@@ -15,10 +16,13 @@ interface TrackProps {
 }
 
 const Track = ({ artist, track, discogsResult, youtubeResult }: TrackProps): JSX.Element => {
+    const pageTitle = trimMultipleWhitespaces(`${artist} ${track} - Electronic Track Search results`);
+
     return (
         <>
             <Head>
-                <MetaData title={`${artist} ${track} - Electronic Track Search results`} />
+                <title>{pageTitle}</title>
+                <MetaData title={pageTitle} />
             </Head>
 
             <main className="flex flex-col items-center justify-center w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700">

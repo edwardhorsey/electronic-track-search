@@ -1,12 +1,11 @@
 import { description, favicon, ogImage, siteUrl, title as defaultTitle, locale } from '../config';
-import { trimMultipleWhitespaces } from '../utils/misc';
 
 interface MetaDataProps {
     title?: string;
 }
 
 const MetaData = ({ title = undefined }: MetaDataProps): JSX.Element => {
-    const metaTitle = trimMultipleWhitespaces(title ?? defaultTitle);
+    const metaTitle = title ?? defaultTitle;
 
     return (
         <>

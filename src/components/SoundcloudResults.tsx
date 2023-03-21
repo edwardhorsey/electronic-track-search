@@ -21,7 +21,7 @@ export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Ele
 export type SoundcloudResultsProps = SearchQuery;
 
 export const SoundcloudResults = ({ artist, track }: SoundcloudResultsProps): JSX.Element => {
-    const url = `/api/mixesSearch/?artist=${artist}&track=${track}`;
+    const url = `/api/mixesSearch?artist=${artist}&track=${track}`;
     const { data, error } = useSWR(url, () => getTrackResults<MixesResultsData>(url));
 
     if (error) return <ErrorMessage message={error.message} />;
@@ -42,6 +42,9 @@ export const SoundcloudResults = ({ artist, track }: SoundcloudResultsProps): JS
 
     return (
         <div className="w-full max-w-2xl h-full mx-auto md:overflow-y-auto">
+            {data.state === 'mock' && (
+                <p>Your search did not yield any results but here are some of my favourite mixes:</p>
+            )}
             {mixes.map((soundcloudMix) => {
                 const key = uniqueId('soundcloud-mix');
                 const { title, url: mixUrl } = soundcloudMix;

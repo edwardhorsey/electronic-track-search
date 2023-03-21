@@ -19,7 +19,7 @@
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.10.1",
         "react-player": "^2.9.0",
-        "swr": "^0.5.6"
+        "swr": "^2.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.14.8",

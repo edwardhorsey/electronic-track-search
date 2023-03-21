@@ -28,3 +28,7 @@ export const findLinkFromSoundcloudDomain = (items: SoundcloudResult[]): string 
 
     return null;
 };
+
+export const trimMultipleWhitespaces = (string: string) => {
+    return string.replace(/\s+/g, ' ').replace(/^\s+|\s+$/, '');
+};

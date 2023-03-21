@@ -1,55 +1,53 @@
 import { GetServerSideProps } from 'next';
-import { ShowResults } from '../stories/ShowResults';
-
-interface TrackPageContainerProps {
-  children: JSX.Element;
-}
-
-const TrackPageContainer = ({
-  children,
-}: TrackPageContainerProps): JSX.Element => (
-  <main
-    className="flex flex-col items-center justify-center
-      w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700"
-  >
-    <h1 className="text-4xl font-bold py-3">Track results</h1>
-    {children}
-  </main>
-);
+import Head from 'next/head';
+import Footer from '../components/Footer';
+import MetaData from '../components/MetaData';
+import { ShowResults } from '../components/ShowResults';
+import { DiscogsResponse } from '../types';
+import { getDiscogsData } from '../utils/discogs';
+import { getYoutubeData } from '../utils/youtube';
+import { trimMultipleWhitespaces } from '../utils/misc';
 
 interface TrackProps {
-  artist: string;
-  track: string;
+    artist: string;
+    track: string;
+    discogsResult?: DiscogsResponse;
+    youtubeResult: string;
 }
 
-const Track = ({ artist, track }: TrackProps): JSX.Element => {
-  if (
-    artist
-    && typeof artist === 'string'
-    && track
-    && typeof track === 'string'
-  ) {
-    return (
-      <TrackPageContainer>
-        <ShowResults artist={artist} track={track} />
-      </TrackPageContainer>
-    );
-  }
+const Track = ({ artist, track, discogsResult, youtubeResult }: TrackProps): JSX.Element => {
+    const pageTitle = trimMultipleWhitespaces(`${artist} ${track} - Electronic Track Search results`);
 
-  return (
-    <TrackPageContainer>
-      <h2 className="text-2xl">Invalid query</h2>
-    </TrackPageContainer>
-  );
+    return (
+        <>
+            <Head>
+                <title>{pageTitle}</title>
+                <MetaData title={pageTitle} />
+            </Head>
+
+            <main className="flex flex-col items-center justify-center w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700">
+                <ShowResults
+                    artist={artist}
+                    track={track}
+                    discogsResult={discogsResult}
+                    youtubeResult={youtubeResult}
+                />
+            </main>
+
+            <Footer />
+        </>
+    );
 };
 
 export default Track;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { query } = context;
-  const { artist, track } = query;
+    const { query } = context;
+    const { artist, track } = query;
+    const searchTerm = `${artist} ${track}`;
+    const [discogsResult, youtubeResult] = await Promise.all([getDiscogsData(searchTerm), getYoutubeData(searchTerm)]);
 
-  return {
-    props: { artist, track },
-  };
+    return {
+        props: { discogsResult, youtubeResult, artist, track },
+    };
 };

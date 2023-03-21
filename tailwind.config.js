@@ -3,7 +3,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Cochin', 'Georgia', 'Times', 'Times New Roman'],
+                sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
             },
             minHeight: {
                 700: '700px',

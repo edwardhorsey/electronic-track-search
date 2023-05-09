@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { uniqueId } from '../utils/misc';
 import { useEffect, useState } from 'react';
 import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from '@reach/combobox';
-import mockBandcampSearchResponse from '../data/mockBandcampSearchResponse.json';
+import { AutoCompleteItem } from '../pages/api/autocomplete';
 
 const id = uniqueId('track');
 
@@ -51,14 +51,14 @@ const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
                                                 return (
                                                     <ComboboxOption
                                                         className="py-1 hover:bg-slate-100"
-                                                        key={str}
+                                                        key={uniqueId(str)}
                                                         value={str}
                                                     />
                                                 );
                                             })}
                                         </ComboboxList>
                                     ) : (
-                                        <span style={{ display: 'block', margin: 8 }}>No results found</span>
+                                        <span className="block m-2">No results found</span>
                                     )}
                                 </ComboboxPopover>
                             )}
@@ -79,17 +79,19 @@ const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
 };
 
 function useAutocomplete(searchTerm: string) {
-    const [suggestions, setSuggestions] = useState<TrackAutoCompleteItem[]>([]);
+    const [suggestions, setSuggestions] = useState<AutoCompleteItem[]>([]);
 
     useEffect(() => {
         if (searchTerm?.trim() !== '') {
             let isFresh = true;
 
-            fetchSuggestions(searchTerm).then((cities) => {
-                if (isFresh) {
-                    setSuggestions(cities);
-                }
-            });
+            fetchSuggestions(searchTerm)
+                .then((cities) => {
+                    if (isFresh) {
+                        setSuggestions(cities);
+                    }
+                })
+                .catch((err) => console.log('Failed to get autocomplete suggestions', err));
 
             return () => {
                 isFresh = false;
@@ -100,65 +102,21 @@ function useAutocomplete(searchTerm: string) {
     return suggestions;
 }
 
-export interface BandcampSearchPublicApiResponse {
-    auto: {
-        results: Result[];
-        stat_params_for_tag: string;
-        time_ms: number;
-    };
-}
+const cache: Record<string, AutoCompleteItem[]> = {};
 
-export interface Result {
-    type: 'a' | 'b' | 't';
-    id: number;
-    art_id: number;
-    img_id: null;
-    name: string;
-    band_id: number;
-    band_name: string;
-    album_name: null | string;
-    item_url_root: string;
-    item_url_path: string;
-    img: string;
-    album_id: number | null;
-    stat_params: string;
-}
-
-interface TrackAutoCompleteItem {
-    bandName: string;
-    name: string;
-}
-
-const cache: Record<string, TrackAutoCompleteItem[]> = {};
-
-function fetchSuggestions(value: string): Promise<TrackAutoCompleteItem[]> {
+function fetchSuggestions(value: string): Promise<AutoCompleteItem[]> {
     if (cache[value]) {
         return Promise.resolve(cache[value]);
     }
 
-    return fetch(
-        'https://cors-anywhere.herokuapp.com/https://bandcamp.com/api/bcsearch_public_api/1/autocomplete_elastic',
-        {
-            method: 'post',
-            body: JSON.stringify({
-                search_text: value,
-                search_filter: 't',
-                full_page: false,
-                fan_id: null,
-            }),
-        },
-    )
+    return fetch(`api/autocomplete?search_text=${value}`)
         .then((res) => res.json())
-        .then((res: BandcampSearchPublicApiResponse) => {
-            // Mock for now
-            res = mockBandcampSearchResponse as BandcampSearchPublicApiResponse;
-
-            const items = res.auto.results;
+        .then((json: AutoCompleteItem[]) => {
+            const items = json || [];
 
             if (items.length > 0) {
-                const results = items.map((item) => ({ bandName: item.band_name, name: item.name }));
-                cache[value] = results;
-                return results;
+                cache[value] = items;
+                return items;
             }
 
             return [];

@@ -20,8 +20,8 @@ export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Ele
 
 export type SoundcloudResultsProps = SearchQuery;
 
-export const SoundcloudResults = ({ artist, track }: SoundcloudResultsProps): JSX.Element => {
-    const url = `/api/mixesSearch?artist=${artist}&track=${track}`;
+export const SoundcloudResults = ({ track }: SoundcloudResultsProps): JSX.Element => {
+    const url = `/api/mixesSearch?track=${track}`;
     const { data, error } = useSWR(url, () => getTrackResults<MixesResultsData>(url));
 
     if (error) return <ErrorMessage message={error.message} />;

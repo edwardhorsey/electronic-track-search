@@ -2,17 +2,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Title from '../components/Title';
 import SearchForm from '../components/SearchForm';
-import { FieldValues } from 'react-hook-form';
 import MetaData from '../components/MetaData';
 import Footer from '../components/Footer';
+import { SearchQuery } from '../types';
 
 export default function Home(): JSX.Element {
     const router = useRouter();
-    const onSubmit = (values: FieldValues): Promise<boolean> => {
-        return router.push({
-            pathname: '/track',
-            query: { ...values },
-        });
+    const onSubmit = (values: SearchQuery): Promise<boolean> => {
+        const { track } = values;
+
+        return router.push({ pathname: '/track', query: { track } });
     };
 
     return (

@@ -4,15 +4,12 @@ import { uniqueId } from '../utils/misc';
 import { useEffect, useState } from 'react';
 import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 import { AutoCompleteItem } from '../pages/api/autocomplete';
+import { SearchQuery } from '../types';
 
 const id = uniqueId('track');
 
-export interface SearchFormFields {
-    track: string;
-}
-
 interface SearchFormProps {
-    onSubmit: (values: SearchFormFields) => Promise<boolean>;
+    onSubmit: (values: SearchQuery) => Promise<boolean>;
 }
 
 const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
@@ -21,7 +18,7 @@ const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
         handleSubmit,
         formState: { errors },
         watch,
-    } = useForm<SearchFormFields>();
+    } = useForm<SearchQuery>();
 
     const searchTerm = watch('track' as const);
     const autocompleteResults = useAutocomplete(searchTerm);

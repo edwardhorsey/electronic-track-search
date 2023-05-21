@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 import MetaData from '../components/MetaData';
 import { ShowResults } from '../components/ShowResults';
 import { DiscogsResponse } from '../types';
-import { getDiscogsData } from '../utils/discogs';
-import { getYoutubeData } from '../utils/youtube';
-import { trimMultipleWhitespaces } from '../utils/misc';
+import { getDiscogsData } from '../lib/discogs';
+import { getYoutubeData } from '../lib/youtube';
+import { trimMultipleWhitespaces } from '../lib/misc';
 
 interface TrackProps {
     artist: string;

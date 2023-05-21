@@ -10,7 +10,7 @@ import {
 } from '../../types';
 import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
-import { extractMixTitles, findLinkFromSoundcloudDomain } from '../../utils/misc';
+import { extractMixTitles, findLinkFromSoundcloudDomain } from '../../lib/misc';
 
 const getMixTitlesFromMixesdbResults = async (search: string): Promise<MixesDbLink[]> => {
     try {

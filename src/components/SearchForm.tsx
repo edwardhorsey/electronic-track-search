@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { Button } from './Button';
-import { uniqueId } from '../utils/misc';
+import { uniqueId } from '../lib/misc';
 import { useEffect, useState } from 'react';
 import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 import { AutoCompleteItem } from '../pages/api/autocomplete';
 import { SearchQuery } from '../types';
+import { fetchSuggestions } from '../lib/autocomplete';
 
 const id = uniqueId('track');
 
@@ -12,7 +13,7 @@ interface SearchFormProps {
     onSubmit: (values: SearchQuery) => Promise<boolean>;
 }
 
-const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
+export default function SearchForm({ onSubmit }: SearchFormProps): JSX.Element {
     const {
         register,
         handleSubmit,
@@ -73,7 +74,7 @@ const SearchForm = ({ onSubmit }: SearchFormProps): JSX.Element => {
             </div>
         </form>
     );
-};
+}
 
 function useAutocomplete(searchTerm: string) {
     const [suggestions, setSuggestions] = useState<AutoCompleteItem[]>([]);
@@ -98,26 +99,3 @@ function useAutocomplete(searchTerm: string) {
 
     return suggestions;
 }
-
-const cache: Record<string, AutoCompleteItem[]> = {};
-
-function fetchSuggestions(value: string): Promise<AutoCompleteItem[]> {
-    if (cache[value]) {
-        return Promise.resolve(cache[value]);
-    }
-
-    return fetch(`api/autocomplete?search_text=${value}`)
-        .then((res) => res.json())
-        .then((json: AutoCompleteItem[]) => {
-            const items = json || [];
-
-            if (items.length > 0) {
-                cache[value] = items;
-                return items;
-            }
-
-            return [];
-        });
-}
-
-export default SearchForm;

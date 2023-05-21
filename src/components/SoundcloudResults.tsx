@@ -1,10 +1,10 @@
 import useSWR from 'swr';
 import ReactPlayer from 'react-player';
 import { SearchQuery, MixesResultsData } from '../types';
-import getTrackResults from '../utils/getTrackResults';
+import getTrackResults from '../lib/getTrackResults';
 import { ErrorMessage } from './ErrorMessage';
 import { SkeletonLoader } from './SkeletonLoader';
-import { uniqueId } from '../utils/misc';
+import { uniqueId } from '../lib/misc';
 
 interface SoundcloudPlayerProps {
     title: string;
@@ -20,8 +20,8 @@ export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Ele
 
 export type SoundcloudResultsProps = SearchQuery;
 
-export const SoundcloudResults = ({ artist, track }: SoundcloudResultsProps): JSX.Element => {
-    const url = `/api/mixesSearch?artist=${artist}&track=${track}`;
+export const SoundcloudResults = ({ track }: SoundcloudResultsProps): JSX.Element => {
+    const url = `/api/mixesSearch?track=${track}`;
     const { data, error } = useSWR(url, () => getTrackResults<MixesResultsData>(url));
 
     if (error) return <ErrorMessage message={error.message} />;

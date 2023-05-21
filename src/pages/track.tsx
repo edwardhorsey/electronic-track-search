@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 import MetaData from '../components/MetaData';
 import { ShowResults } from '../components/ShowResults';
 import { DiscogsResponse } from '../types';
-import { getDiscogsData } from '../utils/discogs';
-import { getYoutubeData } from '../utils/youtube';
-import { trimMultipleWhitespaces } from '../utils/misc';
+import { getDiscogsData } from '../lib/discogs';
+import { getYoutubeData } from '../lib/youtube';
+import { trimMultipleWhitespaces } from '../lib/misc';
 
 interface TrackProps {
     artist: string;
@@ -15,8 +15,8 @@ interface TrackProps {
     youtubeResult: string;
 }
 
-const Track = ({ artist, track, discogsResult, youtubeResult }: TrackProps): JSX.Element => {
-    const pageTitle = trimMultipleWhitespaces(`${artist} ${track} - Electronic Track Search results`);
+const Track = ({ track, discogsResult, youtubeResult }: TrackProps): JSX.Element => {
+    const pageTitle = trimMultipleWhitespaces(`${track} - Electronic Track Search results`);
 
     return (
         <>
@@ -26,12 +26,7 @@ const Track = ({ artist, track, discogsResult, youtubeResult }: TrackProps): JSX
             </Head>
 
             <main className="flex flex-col items-center justify-center w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700">
-                <ShowResults
-                    artist={artist}
-                    track={track}
-                    discogsResult={discogsResult}
-                    youtubeResult={youtubeResult}
-                />
+                <ShowResults track={track} discogsResult={discogsResult} youtubeResult={youtubeResult} />
             </main>
 
             <Footer />
@@ -42,12 +37,10 @@ const Track = ({ artist, track, discogsResult, youtubeResult }: TrackProps): JSX
 export default Track;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { query } = context;
-    const { artist, track } = query;
-    const searchTerm = `${artist} ${track}`;
-    const [discogsResult, youtubeResult] = await Promise.all([getDiscogsData(searchTerm), getYoutubeData(searchTerm)]);
+    const track = `${context.query.track ?? ''}`;
+    const [discogsResult, youtubeResult] = await Promise.all([getDiscogsData(track), getYoutubeData(track)]);
 
     return {
-        props: { discogsResult, youtubeResult, artist, track },
+        props: { discogsResult, youtubeResult, track },
     };
 };

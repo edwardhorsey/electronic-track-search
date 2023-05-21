@@ -10,7 +10,7 @@ import {
 } from '../../types';
 import { keyGoogleSiteSearchMixesDb, soundcloudKeys } from '../../config';
 import { mockSoundcloudLinks } from '../../mocks/data';
-import { extractMixTitles, findLinkFromSoundcloudDomain } from '../../utils/misc';
+import { extractMixTitles, findLinkFromSoundcloudDomain } from '../../lib/misc';
 
 const getMixTitlesFromMixesdbResults = async (search: string): Promise<MixesDbLink[]> => {
     try {
@@ -81,10 +81,14 @@ const fetchAllRequests = async (requests: GoogleSearchRequest[]): Promise<Soundc
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<MixesResultsData | MixesResultsError>) {
-    const { artist, track } = req.query;
-    const searchString = encodeURIComponent(`${artist} ${track}`);
+    const track = `${req.query.track ?? ''}`;
+    const searchString = encodeURIComponent(track);
 
     try {
+        if (!searchString) {
+            throw new Error('Track not provided');
+        }
+
         const mixTitlesFromMixesdbResults = await getMixTitlesFromMixesdbResults(searchString);
         const soundcloudGoogleSearchRequests = createSoundcloudGoogleSearchRequests(mixTitlesFromMixesdbResults);
         const soundcloudMixResults = await fetchAllRequests(soundcloudGoogleSearchRequests);

@@ -8,6 +8,12 @@ import { getDiscogsData } from '../lib/discogs';
 import { getYoutubeData } from '../lib/youtube';
 import { trimMultipleWhitespaces } from '../lib/misc';
 
+import dynamic from 'next/dynamic';
+
+const DarkModeButton = dynamic(() => import('../components/DarkModeButton'), {
+    ssr: false,
+});
+
 interface TrackProps {
     artist: string;
     track: string;
@@ -15,22 +21,22 @@ interface TrackProps {
     youtubeResult: string;
 }
 
-const Track = ({ track, discogsResult, youtubeResult }: TrackProps): JSX.Element => {
+const Track = ({ track, discogsResult, youtubeResult }: TrackProps) => {
     const pageTitle = trimMultipleWhitespaces(`${track} - Electronic Track Search results`);
 
     return (
-        <>
+        <div className="flex flex-col items-center justify-center">
             <Head>
                 <title>{pageTitle}</title>
                 <MetaData title={pageTitle} />
             </Head>
 
-            <main className="flex flex-col items-center justify-center w-full flex-1 sm:px-10 md:px-20 text-center md:h-screen min-h-700">
-                <ShowResults track={track} discogsResult={discogsResult} youtubeResult={youtubeResult} />
-            </main>
+            <DarkModeButton />
+
+            <ShowResults track={track} discogsResult={discogsResult} youtubeResult={youtubeResult} />
 
             <Footer />
-        </>
+        </div>
     );
 };
 

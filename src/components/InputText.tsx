@@ -20,7 +20,7 @@ export const InputText = ({
     errorMessage,
     register,
     required = false,
-}: InputTextProps): JSX.Element => (
+}: InputTextProps) => (
     <div className="flex flex-col mb-2">
         <label htmlFor={id} className="flex flex-col mx-3 xs:mr-0 text-base sm:text-lg">
             <span className="pl-1">{label}</span>

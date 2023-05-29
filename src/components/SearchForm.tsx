@@ -13,7 +13,7 @@ interface SearchFormProps {
     onSubmit: (values: SearchQuery) => Promise<boolean>;
 }
 
-export default function SearchForm({ onSubmit }: SearchFormProps): JSX.Element {
+export default function SearchForm({ onSubmit }: SearchFormProps) {
     const {
         register,
         handleSubmit,
@@ -36,19 +36,19 @@ export default function SearchForm({ onSubmit }: SearchFormProps): JSX.Element {
                         <span className="mb-1">Track</span>
                         <Combobox aria-label="Track" className="flex flex-col text-base sm:text-lg">
                             <ComboboxInput
-                                className="border border-slate-200 p-2 rounded-lg text-base sm:text-lg appearance-none focus:outline-none focus:border-slate-500"
+                                className="border-1 border-slate-200 p-2 mt-1 mb-1 rounded-lg text-base sm:text-lg appearance-none focus:outline-none focus:border-slate-500 dark:focus:border-orange-700 dark:bg-stone-800 dark:text-white"
                                 placeholder={'Seleccion Natural Left Behind'}
                                 {...register('track', { required: true })}
                             />
                             {autocompleteResults && (
-                                <ComboboxPopover className="bg-white">
+                                <ComboboxPopover className="bg-white dark:bg-stone-800">
                                     {autocompleteResults.length > 0 ? (
                                         <ComboboxList className="ml-2 mb-1">
                                             {autocompleteResults.map((result) => {
                                                 const str = `${result.bandName}, ${result.name}`;
                                                 return (
                                                     <ComboboxOption
-                                                        className="py-1 hover:bg-slate-100"
+                                                        className="py-1 hover:bg-slate-100 dark:hover:bg-stone-700"
                                                         key={uniqueId(str)}
                                                         value={str}
                                                     />

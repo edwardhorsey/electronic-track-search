@@ -5,8 +5,14 @@ import SearchForm from '../components/SearchForm';
 import MetaData from '../components/MetaData';
 import Footer from '../components/Footer';
 import { SearchQuery } from '../types';
+import dynamic from 'next/dynamic';
+import Layout from '../components/Layout';
 
-export default function Home(): JSX.Element {
+const DarkModeButton = dynamic(() => import('../components/DarkModeButton'), {
+    ssr: false,
+});
+
+export default function Home() {
     const router = useRouter();
     const onSubmit = (values: SearchQuery): Promise<boolean> => {
         const { track } = values;
@@ -21,10 +27,12 @@ export default function Home(): JSX.Element {
                 <MetaData />
             </Head>
 
-            <main className="flex flex-col items-center justify-center w-full flex-1 px-5 sm:px-15 md:px-20">
+            <DarkModeButton />
+
+            <Layout>
                 <Title />
                 <SearchForm onSubmit={onSubmit} />
-            </main>
+            </Layout>
 
             <Footer />
         </div>

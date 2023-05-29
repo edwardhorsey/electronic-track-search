@@ -4,7 +4,7 @@ interface MetaDataProps {
     title?: string;
 }
 
-const MetaData = ({ title = undefined }: MetaDataProps): JSX.Element => {
+const MetaData = ({ title = undefined }: MetaDataProps) => {
     const metaTitle = title ?? defaultTitle;
 
     return (

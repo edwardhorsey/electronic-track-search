@@ -11,7 +11,7 @@ interface SoundcloudPlayerProps {
     url: string;
 }
 
-export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Element => (
+export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps) => (
     <div className="my-2">
         <h3 className="text-base lg:text-lg pb-1">{title}</h3>
         <ReactPlayer height="130px" width="100%" url={url} />
@@ -20,7 +20,7 @@ export const SoundcloudPlayer = ({ title, url }: SoundcloudPlayerProps): JSX.Ele
 
 export type SoundcloudResultsProps = SearchQuery;
 
-export const SoundcloudResults = ({ track }: SoundcloudResultsProps): JSX.Element => {
+export const SoundcloudResults = ({ track }: SoundcloudResultsProps) => {
     const url = `/api/mixesSearch?track=${track}`;
     const { data, error } = useSWR(url, () => getTrackResults<MixesResultsData>(url));
 

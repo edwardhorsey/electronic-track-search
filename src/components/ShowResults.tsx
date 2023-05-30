@@ -8,14 +8,21 @@ export interface ShowResultsProps extends SearchQuery {
     youtubeResult: string;
 }
 
-export const ShowResults = ({ track, discogsResult, youtubeResult }: ShowResultsProps): JSX.Element => (
-    <div className="flex flex-col md:flex-row w-full h-auto md:h-screen min-h-700">
-        <div className="flex flex-col w-full md:w-3/5 p-5">
-            <DiscogsResults discogsResult={discogsResult} />
-            <YoutubeResult youtubeResult={youtubeResult} />
+export const ShowResults = ({ track, discogsResult, youtubeResult }: ShowResultsProps) => {
+    const title = discogsResult?.title ?? '';
+
+    return (
+        <div className="flex flex-col h-auto min-h-700 p-5">
+            {title && <h3 className="text-xl md:text-2xl text-center">{title}</h3>}
+            <div className="flex flex-col gap-5 md:flex-row w-full pt-5">
+                <div className="flex flex-col w-full md:w-3/5 xl:pr-5">
+                    <DiscogsResults discogsResult={discogsResult} />
+                    <YoutubeResult youtubeResult={youtubeResult} />
+                </div>
+                <div className="flex justify-center w-full md:w-2/5">
+                    <SoundcloudResults track={track} />
+                </div>
+            </div>
         </div>
-        <div className="flex justify-center w-full md:w-2/5 p-5">
-            <SoundcloudResults track={track} />
-        </div>
-    </div>
-);
+    );
+};

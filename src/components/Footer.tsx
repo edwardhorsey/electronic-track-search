@@ -3,7 +3,7 @@ import Image from 'next/image';
 const Footer = () => (
     <footer className="flex items-center justify-center w-full h-10 md:h-12">
         <a
-            className="flex items-center justify-center text-slate-700 text-sm md:text-base"
+            className="flex items-center justify-center text-stone-900 dark:text-white text-sm md:text-base"
             href="https://github.com/edwardhorsey/ets"
             target="_blank"
             rel="noopener noreferrer"

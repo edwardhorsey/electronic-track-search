@@ -2,13 +2,10 @@ export interface SkeletonLoaderProps {
     type?: 'Discogs' | 'Youtube';
 }
 
-export const SkeletonLoader = ({ type }: SkeletonLoaderProps): JSX.Element => {
+export const SkeletonLoader = ({ type }: SkeletonLoaderProps) => {
     if (type === 'Discogs') {
         return (
-            <div
-                className="border border-slate-400 shadow rounded-md p-4
-        max-w-sm w-full mx-auto mb-4"
-            >
+            <div className="border border-slate-400 shadow rounded-md p-4 max-w-sm w-full mx-auto mb-4">
                 <div className="animate-pulse flex flex-col items-center md:flex-row md:items-start space-y-4 md:space-x-4">
                     <div className="h-36 bg-slate-400 rounded w-full mx-auto" />
                     <div className="w-full space-y-4 py-1">

@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import DetectThemeJavaScript from '../components/DetectThemeScript';
 
 export default function Document() {
     return (
@@ -12,8 +13,9 @@ export default function Document() {
                     crossOrigin="anonymous"
                 />
                 <link rel="icon" href="/favicon.ico" />
+                <DetectThemeJavaScript />
             </Head>
-            <body>
+            <body className="bg-white text-bg-stone-900 dark:bg-stone-900 dark:text-white transition-colors duration-200">
                 <Main />
                 <NextScript />
             </body>

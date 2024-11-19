@@ -31,7 +31,7 @@ export { soundcloudKeys, keyDiscogs, keyYoutube, keyGoogleSiteSearchMixesDb };
 export const description =
     'A search engine for tracks played in DJ sets - find mixes which feature a track. Search for a track - Receive release information - Receive mixes featuring the track';
 export const favicon = '/favicon.ico';
-export const ogImage = 'https://www.tracksearch.xyz/og.jpeg';
-export const siteUrl = 'https://www.tracksearch.xyz/';
+export const ogImage = 'https://tracksearch.edwardhorsey.dev/og.jpeg';
+export const siteUrl = 'https://tracksearch.edwardhorsey.dev/';
 export const title = 'Electronic Track Search';
 export const locale = 'en_GB';

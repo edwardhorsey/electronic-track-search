@@ -4,7 +4,7 @@
 
 ## 💽🎛🎚💽
 
-### Visit [tracksearch.xyz](https://www.tracksearch.xyz)
+### Visit [tracksearch.edwardhorsey.dev](https://www.tracksearch.edwardhorsey.dev)
 
 <br />
 
